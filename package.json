@@ -27,5 +27,8 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
+  },
+  "pre-commit": {
+    "run": "lint"
   }
 }
