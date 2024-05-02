@@ -23,6 +23,9 @@ importers:
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.11.20)
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
 
 packages:
 
@@ -3378,8 +3381,7 @@ snapshots:
 
   type-fest@0.21.3: {}
 
-  typescript@5.4.5:
-    optional: true
+  typescript@5.4.5: {}
 
   undici-types@5.26.5: {}
 

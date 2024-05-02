@@ -11,12 +11,14 @@
     "@swc/jest": "^0.2.36",
     "@types/jest": "^29.5.12",
     "commitizen": "^4.3.0",
-    "jest": "^29.7.0" 
+    "jest": "^29.7.0",
+    "typescript": "^5.4.5"
   },
   "scripts": {
     "commit": "cz",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "build": "tsc"
   },
   "config": {
     "commitizen": {
