@@ -2,7 +2,7 @@ import { RestClientApi } from "@utils/types";
 import get from "./get";
 import create from "./create";
 import _delete from "./delete";
-import getQrCode from "./get_qr_code";
+import getQrCode from "./get-qr-code";
 import list from "./list";
 
 export default (restClient: RestClientApi) => {
