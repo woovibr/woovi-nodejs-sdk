@@ -11,6 +11,11 @@
     "emitDeclarationOnly": false,
     "useDefineForClassFields": true,
     "forceConsistentCasingInFileNames": true, 
+    "baseUrl": ".",
+    "paths": {
+      "@utils/*": ["./src/utils/*"],
+      "@src/*": ["./src/*"]
+    }
   },
   "paths": {
     "@woovi/node-sdk": [
