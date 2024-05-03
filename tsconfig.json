@@ -23,6 +23,6 @@
   "exclude": [
     "node_modules",
     "coverage",
-    "tests"
+    "e2e"
   ]
 }
