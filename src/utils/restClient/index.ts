@@ -1,11 +1,8 @@
 import Constants from '@utils/constants';
 
 import type { ApiConfig } from '@src/types';
+import { RestClientConfig } from '@utils/types';
 
-interface RestClientConfig {
-  queryParams?: Record<string, string | number>;
-  retries?: number;
-}
 
 const RestClient = (clientConfig: ApiConfig) => {
     function appendQueryParamsToUrl(url: string, queryParams?: Record<string, string | number>): string {
