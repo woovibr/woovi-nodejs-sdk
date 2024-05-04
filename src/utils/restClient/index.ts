@@ -73,11 +73,6 @@ const RestClient = (clientConfig: ApiConfig) => {
 
 			if (response.ok) {
 				const data = await response.json();
-				const api_response = {
-					status: response.status,
-					headers: response.headers,
-				};
-				data.api_response = api_response;
 
 				return data as T;
 			} else {
