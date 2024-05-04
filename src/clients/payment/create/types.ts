@@ -1,4 +1,4 @@
-import { payment } from "../commonTypes";
+import { Payment } from "../commonTypes";
 
 type DestinationAliasType = "CPF" | "CNPJ" | "EMAIL" | "PHONE" | "RANDOM";
 
@@ -21,5 +21,5 @@ interface PaymentQRRequest {
 export declare type CreatePayload = PaymentQRRequest | PaymentPixRequest;
 
 export declare type CreateResponse = {
-  payment: payment;
+  payment: Payment;
 };

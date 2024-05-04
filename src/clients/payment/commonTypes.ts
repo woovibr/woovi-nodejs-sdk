@@ -1,5 +1,5 @@
 
-export type destination = {
+export type Destination = {
     name: string;
     taxID: string;
     pixKey: string;
@@ -8,7 +8,7 @@ export type destination = {
     account: string;
 }
 
-export type payment = {
+export type Payment = {
     value: number;
     destinationAlias: string;
     destinationAliasType: "CPF" | "CNPJ" | "EMAIL" | "PHONE" | "RANDOM";
@@ -19,7 +19,7 @@ export type payment = {
     sourceAccountId: string;
 }
 
-export type transaction = {
+export type Transaction = {
     value: number;
     time: string;
     endToEndId: string;

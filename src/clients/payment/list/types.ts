@@ -1,10 +1,10 @@
 import { PageInfo } from "@src/clients/commonTypes";
-import { destination, payment, transaction } from "../commonTypes";
+import { Destination, Payment, Transaction } from "../commonTypes";
 
 type payments = {
-    payment: payment;
-    destination: destination;
-    transaction: transaction;
+    payment: Payment;
+    Destination: Destination;
+    transaction: Transaction;
 }
 
 export declare type ListResponse = {
