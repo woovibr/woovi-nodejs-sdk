@@ -8,7 +8,7 @@ export default (restClient: RestClientApi) => {
     return {
         create: create(restClient),
         delete: _delete(restClient),
-        handler: handler(restClient),
+        handler: handler,
         list: list(restClient),
     }
 }
