@@ -1,5 +1,5 @@
 
-export declare interface PixQRCode {
+export interface PixQRCode {
     name: string;
     value: string;
     brCode: string;
