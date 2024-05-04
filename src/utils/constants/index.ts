@@ -1,8 +1,14 @@
+import { BinaryToTextEncoding } from "crypto";
+
 export const API_BASE_URL: "https://api.woovi.com" = "https://api.woovi.com";
 export const API_RETRIES: 2 = 2;
 export const API_RETRIE_DELAY: 1000 = 1000; 
 
 export const SDK_VERSION: string = '1.0.0';
+
+export const WH_PUBLIC_KEY = "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlHZk1BMEdDU3FHU0liM0RRRUJBUVVBQTRHTkFEQ0JpUUtCZ1FDLytOdElranpldnZxRCtJM01NdjNiTFhEdApwdnhCalk0QnNSclNkY2EzcnRBd01jUllZdnhTbmQ3amFnVkxwY3RNaU94UU84aWVVQ0tMU1dIcHNNQWpPL3paCldNS2Jxb0c4TU5waS91M2ZwNnp6MG1jSENPU3FZc1BVVUcxOWJ1VzhiaXM1WloySVpnQk9iV1NwVHZKMGNuajYKSEtCQUE4MkpsbitsR3dTMU13SURBUUFCCi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo="
+export const WH_ALGORITHM = 'sha256';
+export const WH_SIGNATURE_FORMAT: BinaryToTextEncoding = 'base64';
 
 export const Headers: {
     AUTHORIZATION: 'Authorization',
@@ -36,6 +42,9 @@ export default {
     API_RETRIE_DELAY,
     SDK_VERSION,
     Headers,
+    WH_ALGORITHM,
+    WH_SIGNATURE_FORMAT,
+    WH_PUBLIC_KEY,
     getNodeVersion,
     getNodeArchitecture,
     getNodePlatform,
