@@ -24,10 +24,7 @@ test("Should get error", async () => {
   );
 
   await expect(
-    resource({
-      "pixKey": "9134e286-6f71-427a-bf00-241681624587",
-      "name": "Test Account"
-    })
+    resource({id: "9134e286-6f71-427a-bf00-241681624587"})
   ).rejects.toEqual({
     error: "not exists",
   });
@@ -38,9 +35,14 @@ test("Should have success", async () => {
     Promise.resolve({
       json: () =>
         Promise.resolve({
-          "SubAccount": {
-            "name": "test-sub-account",
-            "pixKey": "c4249323-b4ca-43f2-8139-8232aab09b93"
+          "withdraw": {
+            "account": {
+              "status": "CREATED",
+              "value": 100,
+              "correlationID": "TESTING1323",
+              "destinationAlias": "pixKeyTest@test.com",
+              "comment": "testing-transaction"
+            }
           }
         }),
       ok: true,
@@ -48,15 +50,17 @@ test("Should have success", async () => {
     })
   );
 
-  const response = await resource({
-    "pixKey": "9134e286-6f71-427a-bf00-241681624587",
-    "name": "Test Account"
-  });
+  const response = await resource({id: "9134e286-6f71-427a-bf00-241681624587"});
 
   expect(response).toEqual({
-    "SubAccount": {
-      "name": "test-sub-account",
-      "pixKey": "c4249323-b4ca-43f2-8139-8232aab09b93"
+    "withdraw": {
+      "account": {
+        "status": "CREATED",
+        "value": 100,
+        "correlationID": "TESTING1323",
+        "destinationAlias": "pixKeyTest@test.com",
+        "comment": "testing-transaction"
+      }
     }
   });
 });
