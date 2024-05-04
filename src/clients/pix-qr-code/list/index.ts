@@ -1,5 +1,6 @@
 import { RestClientApi } from "@utils/types";
+import { ListResponse } from "./types";
 
 export default (restClient: RestClientApi) => {
-    return () => {}
+    return () => restClient<ListResponse>('/api/v1/qrcode-static');
 }
