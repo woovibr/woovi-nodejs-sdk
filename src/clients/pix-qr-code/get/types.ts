@@ -1,9 +1,9 @@
 import { PixQRCode } from "../commonTypes";
 
-export declare type GetPayload = {
+export  type GetPayload = {
     id: string;  
 }
 
-export declare type GetResponse = {
+export  type GetResponse = {
     pixQrCode: PixQRCode;
 }

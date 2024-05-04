@@ -1,17 +1,17 @@
-export declare type ApiConfig = {
+export  type ApiConfig = {
   appId: string;
 };
 
-export declare interface ApiResponse {
+export  interface ApiResponse {
   api_response: ResponseFields;
 }
 
-export declare type ResponseFields = {
+export  type ResponseFields = {
   status: number;
   headers: [string, string[]];
 };
 
-export declare type Pagination = {
+export  type Pagination = {
   skip: number;
   limit: number;
 }

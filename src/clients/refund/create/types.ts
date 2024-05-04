@@ -1,12 +1,12 @@
 import { Refund } from "../commonTypes";
 
-export declare type CreatePayload = {
+export  type CreatePayload = {
   value: number;
   transactionEndToEndId: string;
   correlationID: string;
   comment?: string;
 }
 
-export declare type CreateResponse = {
+export  type CreateResponse = {
   refund: Refund;
 };
