@@ -46,6 +46,7 @@ const RestClient = (clientConfig: ApiConfig) => {
 
     async function fetcher<T>(
 		endpoint: string,
+		body?: object,
 		config?: RestClientConfig & RequestInit
 	): Promise<T> {
 		const {
@@ -56,6 +57,7 @@ const RestClient = (clientConfig: ApiConfig) => {
 		} = config || {};
 
 		const url = appendQueryParamsToUrl(`${Constants.API_BASE_URL}${endpoint}`, queryParams);
+		customConfig.body = JSON.stringify(body);
 
 		const headers = Object.assign({}, customConfig.headers, {
 			[Constants.Headers.CONTENT_TYPE]: 'application/json',

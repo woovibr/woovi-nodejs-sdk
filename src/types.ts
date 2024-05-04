@@ -10,3 +10,8 @@ export declare type ResponseFields = {
   status: number;
   headers: [string, string[]];
 };
+
+export declare type Pagination = {
+  skip: number;
+  limit: number;
+}

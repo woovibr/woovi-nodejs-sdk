@@ -4,7 +4,9 @@ export declare interface RestClientConfig {
     retries?: number;
   }
 
+
 export declare type RestClientApi = <T>(
     endpoint: string,
+    body?: object,
     config?: RestClientConfig & RequestInit
 ) => Promise<T> 
