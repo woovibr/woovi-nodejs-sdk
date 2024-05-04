@@ -18,8 +18,8 @@ interface PaymentQRRequest {
   sourceAccountId?: string;
 }
 
-export declare type CreatePayload = PaymentQRRequest | PaymentPixRequest;
+export  type CreatePayload = PaymentQRRequest | PaymentPixRequest;
 
-export declare type CreateResponse = {
+export  type CreateResponse = {
   payment: Payment;
 };

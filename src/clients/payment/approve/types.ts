@@ -1,10 +1,10 @@
 import { Destination, Payment, Transaction } from "../commonTypes";
 
-export declare type ApprovePayload = {
+export  type ApprovePayload = {
     correlationID: string;
 }
 
-export declare type ApproveResponse = {
+export  type ApproveResponse = {
     payment: Payment;
     destination: Destination;
     transaction: Transaction;

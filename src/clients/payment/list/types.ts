@@ -7,7 +7,7 @@ type payments = {
     transaction: Transaction;
 }
 
-export declare type ListResponse = {
+export  type ListResponse = {
     payments: payments[];
     pageInfo: PageInfo;
 }
