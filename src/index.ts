@@ -38,3 +38,7 @@ const createClient = (config: ApiConfig) => {
 }
 
 export { createClient };
+
+export default {
+    createClient
+}
