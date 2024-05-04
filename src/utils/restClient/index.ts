@@ -88,4 +88,14 @@ const RestClient = (clientConfig: ApiConfig) => {
     return fetcher;
 }
 
-export { RestClient };
+function objectToQueryString(obj: {[key: string]: string | number | boolean}) {
+    const queryParams = [];
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            queryParams.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+        }
+    }
+    return queryParams.join('&');
+}
+
+export { RestClient, objectToQueryString };
