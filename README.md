@@ -2,6 +2,6 @@
 SDK for communicating with Woovi Pix Payments
 
 # How do i contribute?
-Please, take a look on [CONTRIBUTING.md](CONTRIBUTING.md)
+Please, take a look on [CONTRIBUTING.md](CONTRIBUTING.MD)
 
 # This project is under MIT license.
