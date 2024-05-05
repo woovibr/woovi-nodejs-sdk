@@ -1,7 +1,7 @@
 import { PageInfo } from "@src/clients/commonTypes";
 import { ChargeRefund } from "../commonTypes";
 
-export type GetPayload = {
+export type ListPayload = {
   chargeId: string;
 };
 
