@@ -1,11 +1,11 @@
-import { Destination, Payment, Transaction } from "../commonTypes";
+import type { Destination, Payment, Transaction } from '../commonTypes';
 
-export  type GetPayload = {
-    id: string;
-}
+export type GetPayload = {
+	id: string;
+};
 
-export  type GetResponse = {
-    payment: Payment;
-    destination: Destination;
-    transaction: Transaction;
-}
+export type GetResponse = {
+	payment: Payment;
+	destination: Destination;
+	transaction: Transaction;
+};

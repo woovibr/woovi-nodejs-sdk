@@ -1,7 +1,7 @@
-export  type DeletePayload = {
-    id: string;
-}
+export type DeletePayload = {
+	id: string;
+};
 
-export  type DeleteResponse = {
-    status: string;
-}
+export type DeleteResponse = {
+	status: string;
+};
