@@ -450,7 +450,7 @@ const response = await woovi.refund.create({
   "comment": "Comentário do reembolso"
 });
 ```
-## Signature
+## Subscription
 
 Call the `subscription` method on your API client to get the subscription resource.
 
@@ -458,7 +458,7 @@ Call the `subscription` method on your API client to get the subscription resour
 
 ### Get a subscriptions
 
-Get a signature from exbacks using the `get` method in the signature resource.
+Get a Subscription from exbacks using the `get` method in the Subscription resource.
 
 [Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/subscription/paths/~1api~1v1~1subscriptions~1%7Bid%7D/get).
 
@@ -466,9 +466,9 @@ Get a signature from exbacks using the `get` method in the signature resource.
 const response = await woovi.subscription.get({id: "some-id"});
 ```
 
-### Create a signature
+### Create a Subscription
 
-To create a signature, use the `create` method on the signature resource.
+To create a Subscription, use the `create` method on the Subscription resource.
 
 [Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/subscription/paths/~1api~1v1~1subscriptions/post).
 
@@ -485,3 +485,169 @@ const response = await woovi.subscriptions.create({
 });
 ```
 
+
+## Transactions
+
+Call the `transactions` method on your API client to get the transactions resource.
+
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/transactions).
+
+### Get a transaction
+
+Get a transaction using the `get` method in the transactions resource.
+
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/transactions/paths/~1api~1v1~1transaction~1%7Bid%7D/get).
+
+```js
+const response = await woovi.transactions.get({ id: 'some-id' });
+```
+
+### Get a list of transactions
+
+Get a list of transactions using the `list` method in the transaction resource.
+
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/transactions/paths/~1api~1v1~1transaction/get).
+
+```js
+const response = await woovi.transactions.list({
+  pagination: { limit: 10, skip: 0 },
+  query: {},
+}); //the pagination object and query parameters are optional
+```
+
+## Transfers
+
+Call the `transfer` method on your API client to obtain the transfer resource.
+
+[Endpoint documentation for more details](<https://developers.openpix.com.br/api#tag/transfer-(request-access)>).
+
+### Create a transfer
+
+To create a transfer, use the `create` method in the transfers resource.
+
+[Endpoint documentation for more details](<https://developers.woovi.com/api#tag/transfer-(request-access)/paths/~1api~1v1~1transfer/post>).
+
+```js
+const response = await woovi.transfer.create({
+  value: 100,
+  fromPixKey: 'from@openpix.com.br',
+  toPixKey: 'to@openpix.com.br',
+});
+```
+
+## Webhooks
+
+Call the `webhook` method on your API client to obtain the webhook resource.
+
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/webhook).
+
+### Delete a webhook
+
+Delete a webhook using the `delete` method in the webhooks resource.
+
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/webhook/paths/~1api~1v1~1webhook~1%7Bid%7D/delete).
+
+```js
+const response = await woovi.webhook.delete({ id: 'some-id' });
+```
+
+### Get a list of webhooks
+
+Get a list of webhooks using the `list` method in the webhook resource.
+
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/webhook/paths/~1api~1v1~1webhook/get).
+
+```js
+const response = await woovi.webhook.list({
+  pagination: { limit: 10, skip: 0 },
+  query: {},
+}); //the pagination object and query are optional
+```
+
+### Create a new webhook
+
+To create a webhook, use the `create` method in the webhook resource.
+
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/webhook/paths/~1api~1v1~1webhook/post).
+
+```js
+const response = await woovi.webhook.create({
+  webhook: {
+    name: 'webhookName',
+    event: 'OPENPIX:CHARGE_CREATED',
+    url: 'https://mycompany.com.br/webhook',
+    authorization: 'openpix',
+    isActive: true,
+  },
+});
+```
+
+### HTTP Handler
+
+The webhook method has a special feature called handle, great for using to validate resources directly in your api. See below how to use it:
+
+```js
+import { createClient } from '@woovi/node-sdk';
+
+const woovi = createClient({ appId: 'your-app-id' });
+
+const handler = woovi.webhook.handler({
+  onChargeCompleted: async (payload) => {},
+  onChargeExpired: async (payload) => {},
+});
+
+export const POST = handler.POST;
+```
+
+Post receives your request.
+
+This allows you to validate a webhook in an API that you can build.
+
+## Subaccounts
+
+Call the `subAccount` method from your API client to get the subaccounts resource.
+
+[Endpoint documentation for more details](<https://developers.woovi.com/api#tag/sub-account-(request-access)>).
+
+### Get details from a subaccount
+
+To get details from a subaccount, use the `get` method in the subaccounts resource.
+
+[Endpoint documentation for more details](<https://developers.woovi.com/api#tag/sub-account-(request-access)/paths/~1api~1v1~1subaccount~1%7Bid%7D/get >).
+
+```js
+const response = await woovi.subAccount.get({ id: 'some-id' });
+```
+
+### List subaccounts
+
+Get a list of subaccounts using the `list` method in the subaccounts resource.
+
+[Endpoint documentation for more details](<https://developers.woovi.com/api#tag/sub-account-(request-access)/paths/~1api~1v1~1subaccount/get>).
+
+```js
+const response = await woovi.subAccount.list({ limit: 10, skip: 0 }); //the pagination object is optional
+```
+
+### Create a new subaccount
+
+To create a subaccount, use the `create` method in the subaccount resource.
+
+[Endpoint documentation for more details](<https://developers.woovi.com/api#tag/sub-account-(request-access)/paths/~1api~1v1~1subaccount/post>).
+
+```js
+const response = await woovi.subAccount.create({
+  pixKey: '9134e286-6f71-427a-bf00-241681624587',
+  name: 'Test Account',
+});
+```
+
+### Make a withdrawal (withdraw)
+
+Withdraw from a subaccount using the `withdraw` method in the subaccounts resource.
+
+[Endpoint documentation for more details](<https://developers.woovi.com/api#tag/sub-account-(request-access)/paths/~1api~1v1~1subaccount~1%7Bid%7D~1withdraw /post>).
+
+```js
+const response = await woovi.subAccount.withdraw({ id: 'pix-key' });
+```
