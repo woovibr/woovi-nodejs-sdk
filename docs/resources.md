@@ -1,114 +1,98 @@
----
-id: sdk-node-resources
-title: Recursos
-sidebar_position: 2
-tags:
-  - api
-  - node
-  - js
-  - javascript
-  - ts
-  - typescript
-  - sdk
----
+## Account
 
-## Conta
+Call the `account` method from your API client to get the accounts resource.
 
-Chame o método `account` seu cliente da API para obter o recurso de contas.
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/account).
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/account).
+### Get an account
 
-### Pegar uma conta
+Call the `get` method on the accounts resource by passing an accountId:
 
-Chame o método `get` no recurso de contas passando um accountId:
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/account/paths/~1api~1v1~1account~1%7BaccountId%7D/get).
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/account/paths/~1api~1v1~1account~1%7BaccountId%7D/get).
-
-```js 
-const response = await woovi.account.get({accountId: "algum-id"});
+```js
+const response = await woovi.account.get({accountId: "some-id"});
 ```
 
-### Obter uma lista de contas
+### Get a list of accounts
 
-Obtenha as contas usando o método `list` no recurso de contas:
+Get the accounts using the `list` method in the accounts resource:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/account/paths/~1api~1v1~1account~1/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/account/paths/~1api~1v1~1account~1/get).
 
-```js 
-const response = await woovi.account.list({limit: 10, skip: 0}); //o objeto de paginação é opcional
+```js
+const response = await woovi.account.list({limit: 10, skip: 0}); //the pagination object is optional
 ```
 
-### Fazer uma retirada(withdraw)
+### Make a withdrawal (withdraw)
 
-Faça withdraw em uma consta usando do método `withdraw` no recurso de de contas.
+Withdraw from a account using the `withdraw` method in the account feature.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/account/paths/~1api~1v1~1account~1%7BaccountId%7D~1withdraw/post).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/account/paths/~1api~1v1~1account~1%7BaccountId%7D~1withdraw/post).
 
-```js 
+```js
 const response = await woovi.account.withdraw({accountId: "string", value: 200});
 ```
+## Cashback loyalty
 
+Call the `cashbackFidelity` method on your API client to get the cashback loyalty feature.
 
-## Fidelidade de cashback
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/cashback-fidelity).
 
-Chame o método `cashbackFidelity` seu cliente da API para obter o recurso de fidelidade de cashback.
+### Get the amount of cashback a user has to receive
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/cashback-fidelity).
+Call the `get` method on the cashback loyalty feature by passing a taxID:
 
-### Pegar a quantidade de cashback que um usuário tem para receber
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/cashback-fidelity/paths/~1api~1v1~1cashback-fidelity~1balance~1%7BtaxID%7D/get).
 
-Chame o método `get` no recurso de fidelidade de cashback passando um taxID:
-
-[Documentação do endpoint para mais detalhes](https://developers.woovi.com/api#tag/cashback-fidelity/paths/~1api~1v1~1cashback-fidelity~1balance~1%7BtaxID%7D/get).
-
-```js 
-const response = await woovi.cashbackFidelity.get({ taxID: "algum-tax-id"});
+```js
+const response = await woovi.cashbackFidelity.get({ taxID: "some-tax-id"});
 ```
 
-### Criar(ou pegar) uma fidelidade de cashback pra um cliente
+### Create (or get) a cashback loyalty for a customer
 
-Crie o recurso chamando o método `create`no recurso de fidelidade de cashback.
+Create the resource by calling the `create` method on the cashback loyalty resource.
 
-[Documentação do endpoint para mais detalhes](https://developers.woovi.com/api#tag/cashback-fidelity/paths/~1api~1v1~1cashback-fidelity/post).
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/cashback-fidelity/paths/~1api~1v1~1cashback-fidelity/post).
 
-```js 
+```js
 const response = await woovi.cashbackFidelity.create({
   "value": 100,
   "taxID": 11111111111
 });
 ```
 
-## Cobrança
+## Charge
 
-Chame o método `charge` seu cliente da API para obter o recurso de cobrança.
+Call the `charge` method on your API client to get the charging feature.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/charge).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/charge).
 
-### Pegar uma cobrança
+### Get a charge
 
-Chame o método `get` no recurso de cobranças passando um id:
+Call the `get` method on the charges resource by passing an id:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge~1%7Bid%7D/delete).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge~1%7Bid%7D/delete).
 
-```js 
-const response = await woovi.charge.get({id: "algum-id"});
+```js
+const response = await woovi.charge.get({id: "some-id"});
 ```
 
-### Obter uma lista de cobranças
+### Get a list of charges
 
-Obtenha as cobranças usando o método `list` no recurso de cobranças:
+Get the charges using the `list` method in the charges resource:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge~1%7Bid%7D/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge~1%7Bid%7D/get).
 
-```js 
-const response = await woovi.charge.list({limit: 10, skip: 0}); //o objeto de paginação é opcional
+```js
+const response = await woovi.charge.list({limit: 10, skip: 0}); //the pagination object is optional
 ```
 
-### Crie uma cobrança
+### Create a charge
 
-Crie uma cobrança usando o método `create` no recurso de cobranças:
+Create a charge using the `create` method in the charges resource:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge/get).
 
 ```js 
 const response = await woovi.charge.create({
@@ -136,50 +120,48 @@ const response = await woovi.charge.create({
     }
   ]
 });
-```
+```### Get image of a QR code from a charge
 
-###  Pegar imagem de um qr code de uma cobrança
+Get the qr code of a charge using the `getQrCode` method in the charges resource:
 
-Obtenha o qr code de uma cobrança usando o método `getQrCode` no recurso de cobranças:
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/charge/paths/~1openpix~1charge~1brcode~1image~1%7B:id%7D.png?size= 1024/get).
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/charge/paths/~1openpix~1charge~1brcode~1image~1%7B:id%7D.png?size=1024/get).
-
-```js 
+```js
 const response = await woovi.charge.getQrCode({size: "768"});
 ```
 
-###  Deletar uma cobrança
+### Delete a charge
 
-Delete uma cobrança usando o método `delete` no recurso de cobranças:
+Delete a charge using the `delete` method in the charges feature:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge~1%7Bid%7D/delete).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge~1%7Bid%7D/delete).
 
-```js 
-const response = await woovi.charge.delete({id: "algum-id"});
+```js
+const response = await woovi.charge.delete({id: "some-id"});
 ```
 
 
-## Extorno de Cobrança
+## Billing Exit
 
-Chame o método `chargeRefund` seu cliente da API para obter o recurso de extorno de uma cobrança.
+Call the `chargeRefund` method on your API client to get the ability to refund a charge.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/charge-refund).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/charge-refund).
 
-### Obter uma lista de extorno cobranças
+### Get a list of extortion charges
 
-Obtenha os extornos de cobrança usando o método `list` no recurso de extorno de cobrança:
+Get the chargebacks using the `list` method in the chargeback feature:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/charge-refund/paths/~1api~1v1~1charge~1%7Bid%7D~1refund/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/charge-refund/paths/~1api~1v1~1charge~1%7Bid%7D~1refund/get).
 
-```js 
-const response = await woovi.chargeRefund.list({limit: 10, skip: 0}); //o objeto de paginação é opcional
+```js
+const response = await woovi.chargeRefund.list({limit: 10, skip: 0}); //the pagination object is optional
 ```
 
-### Crie uma cobrança
+### Create a charge
 
-Crie um extorno de cobrança usando o método `create` no recurso de extorno cobranças:
+Create a billing statement using the `create` method in the billing statement feature:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/charge/paths/~1api~1v1~1charge/get).
 
 ```js 
 const response = await woovi.chargeRefund.create({
@@ -190,38 +172,37 @@ const response = await woovi.chargeRefund.create({
 });
 ```
 
-## Cliente
+## Client
 
-Chame o método `customer` seu cliente da API para obter o recurso de cliente.
+Call the `customer` method on your API client to get the customer resource.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/customer).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/customer).
 
-### Pegar uma cliente
+### Pick up a client
 
-Chame o método `get` no recurso de clientes passando um id:
+Call the `get` method on the customers resource passing an id:
 
-[Documentação do endpoint para mais detalhes](https://developers.woovi.com/api#tag/customer/paths/~1api~1v1~1customer~1%7Bid%7D/get).
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/customer/paths/~1api~1v1~1customer~1%7Bid%7D/get).
 
-```js 
-const response = await woovi.customer.get({id: "algum-id"});
+```js
+const response = await woovi.customer.get({id: "some-id"});
 ```
 
-### Obter uma lista de clientes
+### Get a list of customers
 
-Obtenha os clientes usando o método `list` no recurso de clientes:
+Get the customers using the `list` method in the customers resource:
 
-[Documentação do endpoint para mais detalhes](https://developers.woovi.com/api#tag/customer/paths/~1api~1v1~1customer/get).
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/customer/paths/~1api~1v1~1customer/get).
 
-```js 
-const response = await woovi.customer.list({limit: 10, skip: 0}); //o objeto de paginação é opcional
+```js
+const response = await woovi.customer.list({limit: 10, skip: 0}); //the pagination object is optional
 ```
 
-### Crie uma cliente
+### Create a client
 
-Crie uma cliente usando o método `create` no recurso de clientes:
+Create a client using the `create` method in the clients resource:
 
-[Documentação do endpoint para mais detalhes](https://developers.woovi.com/api#tag/customer/paths/~1api~1v1~1customer/post).
-
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/customer/paths/~1api~1v1~1customer/post).
 ```js 
 const response = await woovi.customer.create({
   "name": "Dan",
@@ -242,11 +223,11 @@ const response = await woovi.customer.create({
 });
 ```
 
-### Fazer update num cliente
+### Update a client
 
-Faça um update em um cliente usando o método `update` no recurso de clientes.
+Update a client using the `update` method in the clients resource.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/customer/paths/~1api~1v1~1customer/post).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/customer/paths/~1api~1v1~1customer/post).
 
 ```js 
 const response = await woovi.customer.update({
@@ -266,38 +247,37 @@ const response = await woovi.customer.update({
   }
 });
 ```
+## Partners
 
-## Parceiros
+Call the `partner` method on your API client to get the partners resource.
 
-Chame o método `partner` seu cliente da API para obter o recurso de parceiros.
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/partner-(request-access)).
 
-[Documentação do endpoint para mais detalhes](https://developers.woovi.com/api#tag/partner-(request-access)).
+### Get a partner pre-registration
 
-### Pegar um pré-registro de parceiro
+Call the `getPreRegistration` method on the partners resource passing a taxID:
 
-Chame o método `getPreRegistration` no recurso de parceiros passando um taxID:
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/partner-(request-access)/paths/~1api~1v1~1partner~1company~1%7BtaxID%7D/get) .
 
-[Documentação do endpoint para mais detalhes](https://developers.woovi.com/api#tag/partner-(request-access)/paths/~1api~1v1~1partner~1company~1%7BtaxID%7D/get).
-
-```js 
-const response = await woovi.partner.getPreRegistration({taxID: "algum-tax-id"});
+```js
+const response = await woovi.partner.getPreRegistration({taxID: "some-tax-id"});
 ```
 
-### Obter todos os pré-registros
+### Get all pre-registrations
 
-Obtenha os pré-registros de parceiros usando o método `list` no recurso de parceiros:
+Get partner pre-registrations using the `list` method in the partners resource:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/partner-(request-access)/paths/~1api~1v1~1partner~1company/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/partner-(request-access)/paths/~1api~1v1~1partner~1company/get).
 
-```js 
-const response = await woovi.partner.list({limit: 10, skip: 0}); //o objeto de paginação é opcional
+```js
+const response = await woovi.partner.list({limit: 10, skip: 0}); //the pagination object is optional
 ```
 
-### Crie um parceiro
+### Create a partner
 
-Crie uma parceiro usando o método `create` no recurso de parceiros:
+Create a partner using the `create` method in the partners resource:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/partner-(request-access)/paths/~1api~1v1~1partner~1company/post).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/partner-(request-access)/paths/~1api~1v1~1partner~1company/post).
 
 ```js 
 const response = await woovi.partner.create({
@@ -337,49 +317,47 @@ const response = await woovi.partner.createApplication({
 });
 ```
 
+## Payment
 
+Call the `payment` method on your API client to get the payments feature.
 
-## Pagamento
+[Endpoint documentation for more details](https://developers.woovi.com/api#tag/partner-(request-access)/).
 
-Chame o método `payment` seu cliente da API para obter o recurso de pagamentos.
+### Approve a payment
 
-[Documentação do endpoint para mais detalhes](https://developers.woovi.com/api#tag/partner-(request-access)/).
+Call the `approve` method in the payments resource by passing a correlationID:
 
-### Aprove um pagamento
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/payment-(request-access)/paths/~1api~1v1~1payment~1approve/post).
 
-Chame o método `approve` no recurso de pagamentos passando um correlationID:
-
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/payment-(request-access)/paths/~1api~1v1~1payment~1approve/post).
-
-```js 
-const response = await woovi.payment.approve({correlationID: "algum-correlation-id"});
+```js
+const response = await woovi.payment.approve({correlationID: "some-correlation-id"});
 ```
 
-### Obter um pagamento
+### Get a payment
 
-Obtenha um pagamento usando o método `get` no recurso de pagamentos:
+Get a payment using the `get` method in the payments feature:
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/payment-(request-access)/paths/~1api~1v1~1payment~1%7Bid%7D/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/payment-(request-access)/paths/~1api~1v1~1payment~1%7Bid%7D/get) .
 
-```js 
-const response = await woovi.payment.get({id: "algum-id"});
+```js
+const response = await woovi.payment.get({id: "some-id"});
 ```
 
-### Obter uma lista de pagamentos
+### Get a list of payments
 
-Obtenha uma lista de pagamentos usando o método `list` no recurso de pagamentos.
+Get a list of payments using the `list` method in the payments feature.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/payment-(request-access)/paths/~1api~1v1~1payment/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/payment-(request-access)/paths/~1api~1v1~1payment/get).
 
-```js 
-const response = await woovi.payment.list({limit: 10, skip: 0}); //o objeto de paginação é opcional
+```js
+const response = await woovi.payment.list({limit: 10, skip: 0}); //the pagination object is optional
 ```
 
-### Criar uma requisição de pagamento
+### Create a payment request
 
-Para criar uma requisição de pagamento, use o método `create` no recurso de payment.
+To create a payment request, use the `create` method in the payment resource.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/payment-(request-access)/paths/~1api~1v1~1payment/post).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/payment-(request-access)/paths/~1api~1v1~1payment/post).
 
 ```js 
 const response = await woovi.payment.create({
@@ -391,39 +369,37 @@ const response = await woovi.payment.create({
   "sourceAccountId": "my-source-account-id"
 });
 ```
+## Get a Qr Code
 
+Call the `pixQrCode` method on your API client to get the qr code resource.
 
-## Pegar um Qr Code
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/pixQrCode).
 
-Chame o método `pixQrCode` seu cliente da API para obter o recurso de qr code.
+### Get a qr code
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/pixQrCode).
+Get a qr code using the `get` method in the qr code resource:
 
-### Obter um qr code
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/pixQrCode/paths/~1api~1v1~1qrcode-static~1%7Bid%7D/get).
 
-Obtenha um qr code usando o método `get` no recurso de qr code:
-
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/pixQrCode/paths/~1api~1v1~1qrcode-static~1%7Bid%7D/get).
-
-```js 
-const response = await woovi.pixQrCode.get({id: "algum-id"});
+```js
+const response = await woovi.pixQrCode.get({id: "some-id"});
 ```
 
-### Obter uma lista de pagamentos
+### Get a list of payments
 
-Obtenha uma lista de qr codes usando o método `list` no recurso de qr code.
+Get a list of qr codes using the `list` method in the qr code resource.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/pixQrCode/paths/~1api~1v1~1qrcode-static/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/pixQrCode/paths/~1api~1v1~1qrcode-static/get).
 
-```js 
-const response = await woovi.pixQrCode.list({limit: 10, skip: 0}); //o objeto de paginação é opcional
+```js
+const response = await woovi.pixQrCode.list({limit: 10, skip: 0}); //the pagination object is optional
 ```
 
-### Criar um qr code estático.
+### Create a static qr code.
 
-Para criar um qr code estático, use o método `create` no recurso de qr code.
+To create a static qr code, use the `create` method in the qr code resource.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/pixQrCode/paths/~1api~1v1~1qrcode-static/post).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/pixQrCode/paths/~1api~1v1~1qrcode-static/post).
 
 ```js 
 const response = await woovi.pixQrCode.create({
@@ -434,38 +410,37 @@ const response = await woovi.pixQrCode.create({
 });
 ```
 
+##Extorno
 
-## Extorno
+Call the `refund` method on your API client to obtain the refund resource.
 
-Chame o método `refund` seu cliente da API para obter o recurso de extorno.
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/refund).
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/refund).
+### Get a refund
 
-### Obter um extorno
+Get a refund using the `get` method in the refund resource:
 
-Obtenha um extorno usando o método `get` no recurso de extorno:
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/refund/paths/~1api~1v1~1refund~1%7Bid%7D/get).
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/refund/paths/~1api~1v1~1refund~1%7Bid%7D/get).
-
-```js 
-const response = await woovi.refund.get({id: "algum-id"});
+```js
+const response = await woovi.refund.get({id: "some-id"});
 ```
 
-### Obter uma lista de extornos
+### Get a list of extortionists
 
-Obtenha uma lista de extornos usando o método `list` no recurso de extorno.
+Get a list of refunds using the `list` method in the refund resource.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/refund/paths/~1api~1v1~1refund/get).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/refund/paths/~1api~1v1~1refund/get).
 
-```js 
-const response = await woovi.refund.list({limit: 10, skip: 0}); //o objeto de paginação é opcional
+```js
+const response = await woovi.refund.list({limit: 10, skip: 0}); //the pagination object is optional
 ```
 
-### Criar um novo extorno
+### Create a new extortion
 
-Para criar um extorno, use o método `create` no recurso de extorno.
+To create a return, use the `create` method on the return resource.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/refund/paths/~1api~1v1~1refund/post).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/refund/paths/~1api~1v1~1refund/post).
 
 ```js 
 const response = await woovi.refund.create({
@@ -475,28 +450,27 @@ const response = await woovi.refund.create({
   "comment": "Comentário do reembolso"
 });
 ```
+## Signature
 
-## Assinatura
+Call the `subscription` method on your API client to get the subscription resource.
 
-Chame o método `subscription` seu cliente da API para obter o recurso de assinatura.
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/subscription).
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/subscription).
+### Get a subscriptions
 
-### Obter uma assinaturas
+Get a signature from exbacks using the `get` method in the signature resource.
 
-Obtenha uma assinatura de extornos usando o método `get` no recurso de assinatura.
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/subscription/paths/~1api~1v1~1subscriptions~1%7Bid%7D/get).
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/subscription/paths/~1api~1v1~1subscriptions~1%7Bid%7D/get).
-
-```js 
-const response = await woovi.subscription.get({id: "algum-id"});
+```js
+const response = await woovi.subscription.get({id: "some-id"});
 ```
 
-### Criar uma assinatura
+### Create a signature
 
-Para criar uma assinatura, use o método `create` no recurso de assinatura.
+To create a signature, use the `create` method on the signature resource.
 
-[Documentação do endpoint para mais detalhes](https://developers.openpix.com.br/api#tag/subscription/paths/~1api~1v1~1subscriptions/post).
+[Endpoint documentation for more details](https://developers.openpix.com.br/api#tag/subscription/paths/~1api~1v1~1subscriptions/post).
 
 ```js 
 const response = await woovi.subscriptions.create({

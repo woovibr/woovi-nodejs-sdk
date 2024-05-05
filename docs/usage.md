@@ -1,120 +1,105 @@
----
-id: sdk-node-usage
-title: Como começar
-sidebar_position: 1
-tags:
-  - api
-  - node
-  - js
-  - javascript
-  - ts
-  - typescript
-  - sdk
----
+## Installing
 
-## Instalando
+Preferably, we recommend NodeJs in its LTS (latest) version.
 
-Preferencialmente, recomendamos o NodeJs em sua versão LTS (latest).
-
-Execute o comando abaixo que instala as dependências necessárias com o npm:
+Run the command below which installs the necessary dependencies with npm:
 
 ```bash
 $ npm install @woovi/node-sdk
 ```
 
-Dessa forma, o SDK será instalado.
+This way, the SDK will be installed.
 
-## Criando o cliente
+## Creating the client
 
-O ponto de entrada do SDK é um `createClient` para o serviço.
+The SDK entry point is a `createClient` for the service.
 
 CommonJs:
 ```js
 const WooviSdk = require("@woovi/node-sdk");
 
-// Para inicializar
-const woovi = WooviSdk.createClient({appId: "seu-app-id"});
+// To initialize
+const woovi = WooviSdk.createClient({appId: "your-app-id"});
 ```
 
 Ts/Module:
-```ts 
+```ts
 import { createClient } from "@woovi/;node-sdk"
 
-// Para inicializar
-const woovi = createClient({appId: "seu-app-id"})
+// To initialize
+const woovi = createClient({appId: "your-app-id"})
 ```
 
-O método `createClient` cria um novo cliente a partir de um ID de aplicativo obtido no [site da OpenPix](https://app.openpix.com.br/home/applications/tab/list).
+The `createClient` method creates a new client from an application ID obtained from the [OpenPix website](https://app.openpix.com.br/home/applications/tab/list).
 
-## Chamando a API
+## Calling the API
 
-Um cliente possui _recursos_ (por exemplo: clientes, cobranças, assinaturas, etc.) que podem ser acessados através de `createClient`.
+A client has _resources_ (e.g. customers, billings, subscriptions, etc.) that can be accessed through `createClient`.
 
 ```js
 woovi.customer
 ```
-
-Cada recurso irá ter um conjunto de métodos que podem serem executados para realizarem operações:
+Each resource will have a set of methods that can be executed to perform operations:
 
 ```js
-const client = woovi.customer.create({}); //lembre-se de passar o payload de criação de cliente
+const client = woovi.customer.create({}); //remember to pass the client creation payload
 ```
 
-## Operações em recursos
+## Operations on resources
 
-Em cada recurso, há uma convenção nos nomes das operações, na qual, em sua maioria, se resumem em:
+In each resource, there is a convention in the names of operations, which, for the most part, are summarized as:
 
-- `get`: Obter apenas um recurso. Associado ao verbo HTTP `GET`.
-- `list`: Obter vários recursos, de forma paginada. Associado ao verbo HTTP `GET`.
-- `create`: Criar um recurso. Associado ao verbo HTTP `POST`.
-- `delete`: Remover um recurso. Associado ao verbo HTTP `DELETE`.
+- `get`: Get just one resource. Associated with the HTTP verb `GET`.
+- `list`: Get various resources, in a paginated form. Associated with the HTTP verb `GET`.
+- `create`: Create a resource. Associated with the HTTP verb `POST`.
+- `delete`: Remove a resource. Associated with the HTTP verb `DELETE`.
 
-### Formato das entradas
+### Input format
 
-No caso de operações de listagem, normalmente se aceita um objeto com um uma chave opcional de paginação.
+In the case of listing operations, an object with an optional paging key is normally accepted.
 
 ```js
 woovi.refund.list({ skip: 0, limit: 20 })
 ```
 
-### Formato de saída
+### Output format
 
-A execução de uma operação irá devolver resultados da API na forma de um array direto ou na forma de um paginador, caso este seja aplicado ao metodo usado.
+Executing an operation will return API results in the form of a direct array or in the form of a pager, if this is applied to the method used.
 
-## Tipagem
+## Typing
 
-Em cada operação disponível para um determinado tipo de recurso, existem tipagens disponíveis direto na resposta, informando o formato de entrada e saída da operação com um link para a documentação da API Rest e exemplo de utilização.
+For each operation available for a given type of resource, there are types available directly in the response, informing the input and output format of the operation with a link to the Rest API documentation and usage example.
 
-Para utilizar, é sugerido utilizar um editor com Intellisense como [Visual Studio Code](https://code.visualstudio.com/).
+To use, it is suggested to use an editor with Intellisense such as [Visual Studio Code](https://code.visualstudio.com/).
 
-Também é possível consultar a documentação no site da OpenPix caso haja dúvidas.
+You can also consult the documentation on the OpenPix website if you have any questions.
 
-## Recursos disponíveis
+## Available resources
 
-Os seguintes recursos estão disponíveis no `Client` gerado:
+The following features are available in the generated `Client`:
 
-- `woovi.account`: Operações em uma conta.
-- `woovi.cashback`: Operações em cashback.
-- `woovi.charge`: Operações em uma carga de pagamento.
-- `woovi.chargeRefund`: Operações em em extorno de uma carga.
-- `woovi.customer`: Operações em clientes.
-- `woovi.partner`: Operações em parceiros.
-- `woovi.pixQrCode`: Operações em codigos qr relacionados a pix.
-- `woovi.refund`: Operações em extorno.
-- `woovi.subAccount`: Operações em sub contas.
-- `woovi.subscription`: Operações em inscrições.
-- `woovi.transactions`: Operações em transações.
-- `woovi.transfer`: Operações em transferencias.
-- `woovi.webhook`: Operações em webhook.
+- `woovi.account`: Operations on an account.
+- `woovi.cashback`: Cashback operations.
+- `woovi.charge`: Operations on a payment charge.
+- `woovi.chargeRefund`: Operations in return for a charge.
+- `woovi.customer`: Operations on customers.
+- `woovi.partner`: Operations on partners.
+- `woovi.pixQrCode`: Operations on pix-related qr codes.
+- `woovi.refund`: Exfund operations.
+- `woovi.subAccount`: Operations on sub accounts.
+- `woovi.subscription`: Subscription operations.
+- `woovi.transactions`: Operations on transactions.
+- `woovi.transfer`: Transfer operations.
+- `woovi.webhook`: Webhook operations.
 
-# Webhook
+## Webhook
 
-O método webhook conta com um recurso especial chamado handle, ótimo para ser usado para validar recursos diretamente na sua api. Veja a seguir como ultiliza-lo:
+The webhook method has a special feature called handle, great for using to validate resources directly in your api. See below how to use it:
 
 ```js
 import { createClient } from "@woovi/node-sdk";
 
-const woovi = createClient({ appId: "seu-app-id" });
+const woovi = createClient({ appId: "your-app-id" });
 
 const handler = woovi.webhook.handler({
   onChargeCompleted: async (payload) => {},
@@ -124,7 +109,9 @@ const handler = woovi.webhook.handler({
 export const POST = handler.POST;
 ```
 
-Post recebe sua requisição.
+Post receives your request.
 
-## Dependências
-O projeto não ultiliza de dependencias externas para seu funcionamento.
+## Dependencies
+The project does not use external dependencies for its operation.
+
+Take a look at [the resources.](./resources.md.md)
