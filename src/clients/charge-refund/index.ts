@@ -1,10 +1,10 @@
 import { RestClientApi } from "@utils/types";
-import get from "./get";
+import list from "./list";
 import create from "./create";
 
 export default (restClient: RestClientApi) => {
-    return {
-        get: get(restClient),
-        create: create(restClient),
-    }
-}
+  return {
+    list: list(restClient),
+    create: create(restClient),
+  };
+};
