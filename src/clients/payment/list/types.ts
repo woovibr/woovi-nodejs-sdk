@@ -1,13 +1,13 @@
-import { PageInfo } from "@src/clients/commonTypes";
-import { Destination, Payment, Transaction } from "../commonTypes";
+import type { PageInfo } from '@src/clients/commonTypes';
+import type { Destination, Payment, Transaction } from '../commonTypes';
 
 type payments = {
-    payment: Payment;
-    Destination: Destination;
-    transaction: Transaction;
-}
+	payment: Payment;
+	Destination: Destination;
+	transaction: Transaction;
+};
 
-export  type ListResponse = {
-    payments: payments[];
-    pageInfo: PageInfo;
-}
+export type ListResponse = {
+	payments: payments[];
+	pageInfo: PageInfo;
+};

@@ -1,9 +1,9 @@
-import { SimpleWebhook, Webhook } from "../commonTypes";
+import type { SimpleWebhook, Webhook } from '../commonTypes';
 
-export  type CreatePayload = {
-    webhook: SimpleWebhook
-}
+export type CreatePayload = {
+	webhook: SimpleWebhook;
+};
 
-export  type CreateResponse = {
-    webhook: Webhook
-}
+export type CreateResponse = {
+	webhook: Webhook;
+};

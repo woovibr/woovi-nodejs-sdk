@@ -1,11 +1,11 @@
-import { RestClientApi } from "@utils/types";
-import { ListResponse } from "./types";
-import { Pagination } from "@src/types";
-import { objectToQueryString } from "@utils/restClient";
+import type { Pagination } from '@src/types';
+import { objectToQueryString } from '@utils/restClient';
+import type { RestClientApi } from '@utils/types';
+import type { ListResponse } from './types';
 
 export default (restClient: RestClientApi) => {
-  return (pagination: Pagination = { limit: 10, skip: 0 }) =>
-    restClient<ListResponse>(
-      `/api/v1/customer?${objectToQueryString({ ...pagination })}`
-    );
+	return (pagination: Pagination = { limit: 10, skip: 0 }) =>
+		restClient<ListResponse>(
+			`/api/v1/customer?${objectToQueryString({ ...pagination })}`,
+		);
 };

@@ -1,10 +1,10 @@
-import { SubAccount } from "../commonTypes";
+import type { SubAccount } from '../commonTypes';
 
-export  type CreatePayload = {
-  pixKey: string;
-  name: string;
-}
+export type CreatePayload = {
+	pixKey: string;
+	name: string;
+};
 
-export  type CreateResponse = {
-  SubAccount: SubAccount;
+export type CreateResponse = {
+	SubAccount: SubAccount;
 };

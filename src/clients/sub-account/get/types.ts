@@ -1,9 +1,9 @@
-import { SubAccount } from "../commonTypes";
+import type { SubAccount } from '../commonTypes';
 
-export  type GetPayload = {
-    id: string;
-}
+export type GetPayload = {
+	id: string;
+};
 
-export  type GetResponse = {
-  SubAccount: SubAccount;
-}
+export type GetResponse = {
+	SubAccount: SubAccount;
+};

@@ -1,9 +1,9 @@
-import { Customer } from "../commonTypes";
+import type { Customer } from '../commonTypes';
 
 export type GetPayload = {
-  id: string;
+	id: string;
 };
 
 export type GetResponse = {
-  customer: Customer;
+	customer: Customer;
 };

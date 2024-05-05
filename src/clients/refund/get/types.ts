@@ -1,9 +1,9 @@
-import { Refund } from "../commonTypes";
+import type { Refund } from '../commonTypes';
 
-export  type GetPayload = {
-    id: string;
-}
+export type GetPayload = {
+	id: string;
+};
 
-export  type GetResponse = {
-    pixTransactionRefund: Refund
-}
+export type GetResponse = {
+	pixTransactionRefund: Refund;
+};

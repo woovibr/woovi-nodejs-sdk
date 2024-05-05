@@ -1,9 +1,9 @@
-import { Account } from "../commonTypes";
+import type { Account } from '../commonTypes';
 
 export type GetPayload = {
-  id: string;
+	id: string;
 };
 
 export type GetResponse = {
-  account: Account;
+	account: Account;
 };

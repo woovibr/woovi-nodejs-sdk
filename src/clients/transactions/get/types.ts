@@ -1,9 +1,9 @@
-import { Transaction } from "../commonTypes";
+import type { Transaction } from '../commonTypes';
 
-export  type GetPayload = {
-    id: string;
-}
+export type GetPayload = {
+	id: string;
+};
 
-export  type GetResponse = {
-    transaction: Transaction
-}
+export type GetResponse = {
+	transaction: Transaction;
+};
