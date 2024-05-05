@@ -27,8 +27,9 @@
   ],
   "exclude": [
     "node_modules",
+    "dist",
+    "docs",
     "coverage",
-    "e2e",
     "*.spec.ts"
   ]
 }
