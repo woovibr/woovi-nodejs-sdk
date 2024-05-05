@@ -47,9 +47,9 @@ export type BasicCustomer = {
   phone: string;
   taxID: string;
   address?: Address;
-}
+};
 
 export type AdditionalInfo = {
   key: string;
   value: string;
-}
+};
