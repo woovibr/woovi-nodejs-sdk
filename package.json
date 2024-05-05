@@ -4,7 +4,6 @@
   "description": "Woovi NodeJS SDK",
   "main": "index.js",
   "repository": "git@github.com:criskell/woovi-nodejs-sdk.git",
-  "author": "criskell <cris.moraes.ds@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.7.2",
