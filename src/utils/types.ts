@@ -5,8 +5,8 @@ export interface RestClientConfig {
 
 export type RestClientApi = <T>(
   endpoint: string,
+  config?: RestClientConfig & RequestInit,
   body?: object,
-  config?: RestClientConfig & RequestInit
 ) => Promise<T>;
 
 export type RequireAtLeastOne<T> = {

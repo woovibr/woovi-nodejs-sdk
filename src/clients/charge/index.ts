@@ -10,7 +10,7 @@ export default (restClient: RestClientApi) => {
     get: get(restClient),
     create: create(restClient),
     delete: _delete(restClient),
-    getQrCode: getQrCode(restClient),
+    getQrCode: getQrCode,
     list: list(restClient),
   };
 };

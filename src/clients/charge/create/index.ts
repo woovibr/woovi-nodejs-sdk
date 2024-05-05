@@ -3,5 +3,5 @@ import { CreateResponse, CreatePayload } from "./types";
 
 export default (restClient: RestClientApi) => {
   return (data: CreatePayload) =>
-    restClient<CreateResponse>("/api/v1/charge", data, { method: "POST" });
+    restClient<CreateResponse>("/api/v1/charge", { method: "POST" }, data);
 };

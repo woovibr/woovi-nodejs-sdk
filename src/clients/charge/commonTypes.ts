@@ -1,6 +1,8 @@
+import { BasicCustomer } from "../commonTypes";
+
 export interface Charge {
   value: number;
-  customer: Customer;
+  customer: BasicCustomer;
   type: "DYNAMIC" | "OVERDUE";
   comment?: string;
   brCode?: string;
