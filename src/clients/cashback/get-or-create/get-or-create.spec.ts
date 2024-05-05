@@ -1,5 +1,5 @@
-import get from ".";
 import { RestClient } from "@utils/restClient";
+import getOrCreate from ".";
 
 const unmockedFetch = global.fetch;
 
@@ -12,7 +12,7 @@ declare var global: {
 };
 
 const client = RestClient({ appId: "123" });
-const resource = get(client);
+const resource = getOrCreate(client);
 
 test("Should get error", async () => {
   global.fetch = jest.fn(() =>
@@ -23,7 +23,12 @@ test("Should get error", async () => {
     })
   );
 
-  await expect(resource({ taxID: "12345678911" })).rejects.toEqual({
+  await expect(
+    resource({
+      taxID: "12345678911",
+      value: 100,
+    })
+  ).rejects.toEqual({
     error: "not exists",
   });
 });
@@ -33,17 +38,25 @@ test("Should have success", async () => {
     Promise.resolve({
       json: () =>
         Promise.resolve({
-          balance: 100,
-          status: "COMPLETED",
+          cashback: {
+            value: 100,
+          },
+          message: "string",
         }),
       ok: true,
       status: 200,
     })
   );
 
-  const response = await resource({ taxID: "12345678911" });
+  const response = await resource({
+    taxID: "12345678911",
+    value: 100,
+  });
+
   expect(response).toEqual({
-    balance: 100,
-    status: "COMPLETED",
+    cashback: {
+      value: 100,
+    },
+    message: "string",
   });
 });

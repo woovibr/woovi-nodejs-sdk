@@ -1,10 +1,10 @@
 import { RestClientApi } from "@utils/types";
+import getOrCreate from "./get-or-create";
 import get from "./get";
-import create from "./create";
 
 export default (restClient: RestClientApi) => {
-    return {
-        get: get(restClient),
-        create: create(restClient),
-    }
-}
+  return {
+    get: get(restClient),
+    getOrCreate: getOrCreate(restClient),
+  };
+};
