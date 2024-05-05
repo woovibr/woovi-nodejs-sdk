@@ -1,5 +1,13 @@
 import { RestClientApi } from "@utils/types";
+import { CreateResponse, CreatePayload } from "./types";
 
 export default (restClient: RestClientApi) => {
-    return () => {}
-}
+  return (data: CreatePayload) =>
+    restClient<CreateResponse>(
+      "/api/v1/partner/application",
+      {
+        method: "POST",
+      },
+      data
+    );
+};
