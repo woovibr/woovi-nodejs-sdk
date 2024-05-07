@@ -12,13 +12,15 @@
     "@types/jest": "^29.5.12",
     "commitizen": "^4.3.0",
     "jest": "^29.7.0",
+    "tsconfig-paths": "^4.2.0",
+    "tscpaths": "^0.0.9",
     "typescript": "^5.4.5"
   },
   "scripts": {
     "commit": "cz",
     "test": "jest",
     "test:watch": "jest --watch",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "lint": "biome lint ./src ./tests",
     "format": "biome check ./src ./tests --apply"
   },
