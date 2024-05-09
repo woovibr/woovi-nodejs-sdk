@@ -31,7 +31,7 @@
     "lint": "npm run lint:prettier",
     "lint:prettier": "prettier --check .",
     "lint:fix": "eslint --fix . && prettier --write ."
-   },
+  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
