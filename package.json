@@ -25,11 +25,13 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
-    "lint": "biome lint ./src ./tests",
     "format": "biome check ./src ./tests --apply",
-    "prepare": "husky install",
-    "pre-commit": "lint-staged"
-  },
+    "prepare": "husky",
+    "pre-commit": "lint-staged",
+    "lint": "npm run lint:prettier",
+    "lint:prettier": "prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write ."
+   },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
