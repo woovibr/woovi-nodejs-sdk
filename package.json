@@ -1,6 +1,6 @@
 {
   "name": "@woovi/node-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1s",
   "description": "Woovi NodeJS SDK",
   "main": "./src/index.ts",
   "repository": "git@github.com:woovibr/woovi-nodejs-sdk.git",
