@@ -1,8 +1,9 @@
 {
   "name": "@woovi/node-sdk",
-  "version": "1.0.1s",
+  "version": "1.0.1",
   "description": "Woovi NodeJS SDK",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "repository": "git@github.com:woovibr/woovi-nodejs-sdk.git",
   "license": "MIT",
   "devDependencies": {
@@ -23,6 +24,9 @@
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "lint": "biome lint ./src ./tests",
     "format": "biome check ./src ./tests --apply"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "config": {
     "commitizen": {
