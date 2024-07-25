@@ -23,7 +23,8 @@
     "test:watch": "jest --watch",
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "lint": "biome lint ./src ./tests",
-    "format": "biome check ./src ./tests --apply"
+    "format": "biome check ./src ./tests --apply",
+    "prepare": "yarn build"
   },
   "publishConfig": {
     "access": "public"
