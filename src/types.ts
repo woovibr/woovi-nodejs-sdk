@@ -1,5 +1,6 @@
 export type ApiConfig = {
   appId: string;
+  retries?: number;
 };
 
 export interface ApiResponse {

@@ -1,7 +1,7 @@
 import type { BinaryToTextEncoding } from "crypto";
 
 export const API_BASE_URL = "https://api.woovi.com" as const;
-export const API_RETRIES = 2 as const;
+export const API_RETRIES = 1 as const;
 export const API_RETRIE_DELAY = 1000 as const;
 
 export const SDK_VERSION: string = "1.0.0";

@@ -28,7 +28,7 @@ describe("Constants", () => {
 
   it("should have correct constants", () => {
     expect(Constants.API_RETRIE_DELAY).toEqual(1000);
-    expect(Constants.API_RETRIES).toEqual(2);
+    expect(Constants.API_RETRIES).toEqual(1);
     expect(Constants.API_BASE_URL).toEqual("https://api.woovi.com");
     expect(Constants.WH_ALGORITHM).toEqual("sha256");
     expect(Constants.WH_SIGNATURE_FORMAT).toEqual("base64");
