@@ -96,7 +96,7 @@ const RestClient = (clientConfig: ApiConfig) => {
       throw await response.json();
     };
 
-    return await retryWithExponentialBackoff(fetchFn, retries);
+    return await retryWithExponentialBackoff(fetchFn, clientConfig.retries || retries);
   }
 
   return fetcher;
