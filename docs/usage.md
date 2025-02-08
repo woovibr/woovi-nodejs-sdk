@@ -24,7 +24,7 @@ const woovi = WooviSdk.createClient({appId: "your-app-id"});
 
 Ts/Module:
 ```ts
-import { createClient } from "@woovi/;node-sdk"
+import { createClient } from "@woovi/node-sdk"
 
 // To initialize
 const woovi = createClient({appId: "your-app-id"})
