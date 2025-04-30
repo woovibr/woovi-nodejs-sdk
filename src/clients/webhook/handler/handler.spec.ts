@@ -62,6 +62,7 @@ describe("Webhook Utils", () => {
       const req = {
         headers: new Map([["x-webhook-signature", "invalid_signature"]]),
         json: jest.fn().mockResolvedValue({}),
+        text: jest.fn().mockResolvedValue("{}"),
       };
       const response = await handleWebhooks({}, req as any);
       expect(response.status).toBe(400);
@@ -84,6 +85,7 @@ describe("Webhook Utils", () => {
       const req = {
         headers: new Map([["x-webhook-signature", "valid_signature"]]),
         json: jest.fn().mockResolvedValue(payload),
+        text: jest.fn().mockResolvedValue(JSON.stringify(payload)),
       };
       const response = await handleWebhooks(config, req as any);
       expect(mockHandler).toHaveBeenCalledWith(payload);
@@ -101,6 +103,7 @@ describe("Webhook Utils", () => {
       const req = {
         headers: new Map([["x-webhook-signature", "valid_signature"]]),
         json: jest.fn().mockResolvedValue({ event: "UNKNOWN_EVENT", data: {} }),
+        text: jest.fn().mockResolvedValue(JSON.stringify({ event: "UNKNOWN_EVENT", data: {} })),
       };
       const response = await handleWebhooks({}, req as any);
       expect(response.status).toBe(404);
@@ -126,6 +129,7 @@ describe("Webhook Utils", () => {
       const req = {
         headers: new Map([["x-webhook-signature", "invalid_signature"]]),
         json: jest.fn().mockResolvedValue({}),
+        text: jest.fn().mockResolvedValue("{}"),
       };
       const response = await Handle({}).POST(req as any);
       expect(response.status).toBe(400);
@@ -148,6 +152,7 @@ describe("Webhook Utils", () => {
       const req = {
         headers: new Map([["x-webhook-signature", "valid_signature"]]),
         json: jest.fn().mockResolvedValue(payload),
+        text: jest.fn().mockResolvedValue(JSON.stringify(payload)),
       };
       const response = await Handle(config).POST(req as any);
       expect(mockHandler).toHaveBeenCalledWith(payload);
@@ -165,6 +170,7 @@ describe("Webhook Utils", () => {
       const req = {
         headers: new Map([["x-webhook-signature", "valid_signature"]]),
         json: jest.fn().mockResolvedValue({ event: "UNKNOWN_EVENT", data: {} }),
+        text: jest.fn().mockResolvedValue(JSON.stringify({ event: "UNKNOWN_EVENT", data: {} })),
       };
       const response = await Handle({}).POST(req as any);
       expect(response.status).toBe(404);

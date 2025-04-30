@@ -47,17 +47,22 @@ export async function handleWebhooks(
     });
   }
 
-  const payload: WebhookPayload = await req.json();
+  const payloadString = await req.text();
+  const payload: WebhookPayload = JSON.parse(payloadString);
 
   if (
     !verifyPayload({
-      payload: JSON.stringify(payload),
+      payload: payloadString,
       signature: webhook_signature,
     })
   )
-    return new Response("Error occured", {
+    return new Response("Error occurred -- invalid signature", {
       status: 400,
     });
+
+  if ((payload as any)?.evento === "teste_webhook") {
+    return new Response("Test webhook acknowledged", { status: 200 });
+  }
 
   const handlerMap: WebhooksHandlerMap = {
     "OPENPIX:CHARGE_CREATED": config.onChargeCreated,
