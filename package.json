@@ -1,11 +1,15 @@
 {
   "name": "@woovi/node-sdk",
-  "version": "1.0.1",
   "description": "Woovi NodeJS SDK",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "repository": "git@github.com:woovibr/woovi-nodejs-sdk.git",
-  "license": "MIT",
+  "version": "1.0.1",
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@woovi/apiwithlog": "^2.6.0"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@swc/core": "^1.11.24",
@@ -17,27 +21,27 @@
     "tscpaths": "^0.0.9",
     "typescript": "^5.8.3"
   },
-  "scripts": {
-    "commit": "cz",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
-    "lint": "biome lint ./src ./tests",
-    "format": "biome check ./src ./tests --apply",
-    "prepare": "pnpm build"
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "pre-commit": {
+    "run": "lint"
   },
   "publishConfig": {
     "access": "public"
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+  "repository": "git@github.com:woovibr/woovi-nodejs-sdk.git",
+  "scripts": {
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "commit": "cz",
+    "format": "biome check ./src ./tests --apply",
+    "lint": "biome lint ./src ./tests",
+    "prepare": "pnpm build",
+    "prepublishOnly": "pnpm build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "release:major": "npm version major && git push --follow-tags",
+    "release:minor": "npm version minor && git push --follow-tags",
+    "release:patch": "npm version patch && git push --follow-tags"
   },
-  "pre-commit": {
-    "run": "lint"
-  },
-  "dependencies": {
-    "@woovi/apiwithlog": "^2.6.0"
-  }
+  "types": "./dist/index.d.ts"
 }
