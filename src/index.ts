@@ -18,9 +18,11 @@ import webhook from "./clients/webhook";
 import Constants from "@utils/constants";
 
 const createClient = (config: ApiConfig) => {
+  const { baseUrl = Constants.API_BASE_URL, ...rest } = config || {};
+
   const requestSender = RestClient({
-    baseUrl: Constants.API_BASE_URL,
-    ...(config || {}),
+    baseUrl,
+    ...rest,
   });
 
   return {
