@@ -15,14 +15,10 @@ import subscription from "./clients/subscription";
 import transactions from "./clients/transactions";
 import transfer from "./clients/transfer";
 import webhook from "./clients/webhook";
-import Constants from "@utils/constants";
 
 const createClient = (config: ApiConfig) => {
-  const { baseUrl = Constants.API_BASE_URL, ...rest } = config || {};
-
   const requestSender = RestClient({
-    baseUrl,
-    ...rest,
+    ...(config || {}),
   });
 
   return {
