@@ -19,8 +19,8 @@ import Constants from "@utils/constants";
 
 const createClient = (config: ApiConfig) => {
   const requestSender = RestClient({
-    ...(config || {}),
     baseUrl: Constants.API_BASE_URL,
+    ...(config || {}),
   });
 
   return {
