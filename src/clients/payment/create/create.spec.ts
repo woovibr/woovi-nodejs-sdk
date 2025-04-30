@@ -81,3 +81,45 @@ test("Should have success", async () => {
     },
   });
 });
+
+test("Should have success when creating payment with QR code and value", async () => {
+  const payload = {
+    qrCode:
+      "000201010212261060014br.gov.bcb.pix2584https://api.openpix.com.br/openpix/testing?transactionID=static123520400005303986540550.005802BR5913Test User6009SAO PAULO62070503***6304ABCD",
+    value: 5000,
+    correlationID: "payment_qr_with_value",
+    comment: "Payment for static QR with value",
+    sourceAccountId: "my-source-account-id-qr",
+  };
+
+  const expectedPaymentResponse = {
+    value: 5000,
+    status: "CREATED",
+    qrCode: payload.qrCode,
+    comment: payload.comment,
+    correlationID: payload.correlationID,
+    sourceAccountId: payload.sourceAccountId,
+  };
+
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () =>
+        Promise.resolve({
+          payment: expectedPaymentResponse,
+        }),
+      ok: true,
+      status: 200,
+    }),
+  );
+
+  const response = await resource(payload);
+
+  expect(response).toEqual({ payment: expectedPaymentResponse });
+  expect(global.fetch).toHaveBeenCalledWith(
+    expect.stringContaining("/api/v1/payment"),
+    expect.objectContaining({
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+  );
+});

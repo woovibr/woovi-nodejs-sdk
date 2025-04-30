@@ -16,6 +16,7 @@ interface PaymentQRRequest {
   correlationID: string;
   comment?: string;
   sourceAccountId?: string;
+  value?: number;
 }
 
 export type CreatePayload = PaymentQRRequest | PaymentPixRequest;
