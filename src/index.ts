@@ -15,9 +15,13 @@ import subscription from "./clients/subscription";
 import transactions from "./clients/transactions";
 import transfer from "./clients/transfer";
 import webhook from "./clients/webhook";
+import Constants from "@utils/constants";
 
 const createClient = (config: ApiConfig) => {
-  const requestSender = RestClient(config);
+  const requestSender = RestClient({
+    ...config,
+    baseUrl: Constants.API_BASE_URL,
+  });
 
   return {
     account: account(requestSender),
