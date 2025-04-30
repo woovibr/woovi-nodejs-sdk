@@ -62,7 +62,7 @@ const RestClient = (clientConfig: ApiConfig) => {
     } = config || {};
 
     const url = appendQueryParamsToUrl(
-      `${config.baseUrl}${endpoint}`,
+      `${clientConfig.baseUrl}${endpoint}`,
       queryParams,
     );
     if (body) customConfig.body = JSON.stringify(body);
