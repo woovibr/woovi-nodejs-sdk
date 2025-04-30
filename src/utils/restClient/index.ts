@@ -1,3 +1,4 @@
+import { apiWithLog } from '@woovi/apiwithlog'
 import Constants from "@utils/constants";
 
 import type { ApiConfig } from "@src/types";
@@ -75,7 +76,7 @@ const RestClient = (clientConfig: ApiConfig) => {
     let response: Response;
 
     const fetchFn = async () => {
-      response = await fetch(
+      response = await apiWithLog(
         url,
         Object.assign(
           {},
