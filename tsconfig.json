@@ -29,8 +29,6 @@
     "node_modules",
     "dist",
     "docs",
-    "coverage",
-    "./src/**/**/*.spec.ts",
-    "./src/**/**/**/*.spec.ts"
+    "coverage"
   ]
 }

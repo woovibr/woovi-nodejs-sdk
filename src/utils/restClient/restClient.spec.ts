@@ -1,4 +1,3 @@
-import constants from "@utils/constants";
 import { RestClient } from ".";
 
 const unmockedFetch = global.fetch;
