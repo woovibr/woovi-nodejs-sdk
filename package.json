@@ -1,7 +1,7 @@
 {
   "name": "@woovi/node-sdk",
   "description": "Woovi NodeJS SDK",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
