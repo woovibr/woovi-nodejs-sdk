@@ -1,4 +1,4 @@
-import type { BinaryToTextEncoding } from "crypto";
+import type { BinaryToTextEncoding } from "node:crypto";
 
 export const API_BASE_URL = "https://api.woovi.com" as const;
 export const API_RETRIES = 1 as const;
@@ -35,15 +35,7 @@ export const getNodePlatform = (): string => {
 
 export const getUserAgent = (): string => {
   return (
-    "Woovi Node.js SDK v" +
-    SDK_VERSION +
-    " (node " +
-    getNodeVersion() +
-    "-" +
-    getNodeArchitecture() +
-    "-" +
-    getNodePlatform() +
-    ")"
+    `Woovi Node.js SDK v${SDK_VERSION} (node ${getNodeVersion()}-${getNodeArchitecture()}-${getNodePlatform()})`
   );
 };
 

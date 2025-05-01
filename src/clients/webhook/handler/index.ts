@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import crypto from "node:crypto";
 import constants from "@utils/constants";
 import type {
   HandlerFn,
@@ -87,7 +87,7 @@ export async function handleWebhooks(
 
 async function _handler(
   event: WebhookPayload,
-  callback: Function,
+  callback: HandlerFn<WebhookPayload>,
 ): Promise<Response> {
   const response = await callback(event);
   if (response) return response;

@@ -34,8 +34,8 @@
   "scripts": {
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "commit": "cz",
-    "format": "biome check ./src ./tests --apply",
-    "lint": "biome lint ./src ./tests",
+    "format": "biome check ./src --apply",
+    "lint": "biome lint ./src",
     "prepare": "pnpm build",
     "prepublishOnly": "pnpm build",
     "test": "jest",

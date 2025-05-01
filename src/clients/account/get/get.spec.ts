@@ -7,7 +7,7 @@ afterAll(() => {
   global.fetch = unmockedFetch;
 });
 
-declare var global: {
+declare let global: {
   fetch: unknown;
 };
 

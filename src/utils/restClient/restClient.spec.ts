@@ -6,7 +6,7 @@ afterAll(() => {
   global.fetch = unmockedFetch;
 });
 
-declare var global: {
+declare let global: {
   fetch: unknown;
 };
 
@@ -50,7 +50,7 @@ describe("RestClient", () => {
   });
 
   test("Should handle network errors and retry according to the retry count", async () => {
-    var fetchCounter = 0;
+    let fetchCounter = 0;
 
     global.fetch = jest.fn(() => {
       fetchCounter++;
