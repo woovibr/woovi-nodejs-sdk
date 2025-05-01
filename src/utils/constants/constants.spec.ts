@@ -14,16 +14,16 @@ describe("Constants", () => {
     originalNodeArchitecture = Constants.getNodeArchitecture();
     originalNodePlatform = Constants.getNodePlatform();
 
-    Constants["SDK_VERSION"] = "1.0.0-test";
-    Constants["getNodeVersion"] = jest.fn(() => "v13.14.0");
-    Constants["getNodeArchitecture"] = jest.fn(() => "x64");
-    Constants["getNodePlatform"] = jest.fn(() => "linux");
+    Constants.SDK_VERSION = "1.0.0-test";
+    Constants.getNodeVersion = jest.fn(() => "v13.14.0");
+    Constants.getNodeArchitecture = jest.fn(() => "x64");
+    Constants.getNodePlatform = jest.fn(() => "linux");
   });
 
   afterEach(() => {
-    Constants["getNodeVersion"] = jest.fn(() => originalNodeVersion);
-    Constants["getNodeArchitecture"] = jest.fn(() => originalNodeArchitecture);
-    Constants["getNodePlatform"] = jest.fn(() => originalNodePlatform);
+    Constants.getNodeVersion = jest.fn(() => originalNodeVersion);
+    Constants.getNodeArchitecture = jest.fn(() => originalNodeArchitecture);
+    Constants.getNodePlatform = jest.fn(() => originalNodePlatform);
   });
 
   it("should have correct constants", () => {

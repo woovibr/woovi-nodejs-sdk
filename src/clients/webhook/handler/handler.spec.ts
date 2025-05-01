@@ -1,7 +1,7 @@
-import crypto from "crypto";
+import crypto from "node:crypto";
 import Handle, { verifyPayload, handleWebhooks } from ".";
 
-jest.mock("crypto");
+jest.mock("node:crypto");
 const mockedCrypto = crypto as jest.Mocked<typeof crypto>;
 
 describe("Webhook Utils", () => {

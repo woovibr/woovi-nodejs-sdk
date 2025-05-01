@@ -108,9 +108,9 @@ function objectToQueryString(obj: {
 }) {
   const queryParams = [];
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       queryParams.push(
-        encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]),
+        `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`,
       );
     }
   }

@@ -83,7 +83,7 @@ export type WebhookPayload =
 
 export type HandlerFn<T> = (
   payload: T,
-) => Promise<void | Response> | void | Response;
+) => Promise<undefined | Response> | undefined | Response;
 
 export type VerifyPayloadType = {
   payload: string;
