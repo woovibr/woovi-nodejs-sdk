@@ -1,5 +1,5 @@
-import type { BasicCustomer } from "@src/clients/commonTypes";
-import type { Charge } from "@src/clients/transactions/commonTypes";
+import type { BasicCustomer } from '@src/clients/commonTypes';
+import type { Charge } from '@src/clients/transactions/commonTypes';
 
 export type WebhooksHandler = {
   config: WebhookRegistrationConfig;
@@ -39,6 +39,20 @@ type Pix = {
   raw: Raw;
 };
 
+type Payment = {
+  status: string;
+  value: number;
+  destinationAlias: string;
+  correlationID: string;
+};
+
+type Transaction = {
+  correlationID: string;
+  value: number;
+  endToEndId: string;
+  time: string;
+};
+
 type ChargePayload = {
   charge: ChargePayload;
   pix: Pix;
@@ -50,36 +64,45 @@ type TransactionPayload = {
   pix: Pix;
 };
 
-type MoventPayload = {
+type MovementPayload = {
   charge?: ChargePayload;
-  pix: Pix;
+  pix?: Pix;
+  payment?: Payment;
+  transaction?: Transaction;
 };
 
+type ChargeCreatedPayload = { event: 'OPENPIX:CHARGE_CREATED' } & ChargePayload;
+type ChargeCompletedPayload = {
+  event: 'OPENPIX:CHARGE_COMPLETED';
+} & ChargePayload;
+type ChargeExpiredPayload = { event: 'OPENPIX:CHARGE_EXPIRED' } & ChargePayload;
+
+type TransactionReceivedPayload = {
+  event: 'OPENPIX:TRANSACTION_RECEIVED';
+} & TransactionPayload;
+type TransactionRefundReceivedPayload = {
+  event: 'OPENPIX:TRANSACTION_REFUND_RECEIVED';
+} & TransactionPayload;
+
+type MovementConfirmedPayload = {
+  event: 'OPENPIX:MOVEMENT_CONFIRMED';
+} & MovementPayload;
+type MovementFailedPayload = {
+  event: 'OPENPIX:MOVEMENT_FAILED';
+} & MovementPayload;
+type MovementRemovedPayload = {
+  event: 'OPENPIX:MOVEMENT_REMOVED';
+} & MovementPayload;
+
 export type WebhookPayload =
-  | ({
-      event: "OPENPIX:CHARGE_CREATED";
-    } & ChargePayload)
-  | ({
-      event: "OPENPIX:CHARGE_COMPLETED";
-    } & ChargePayload)
-  | ({
-      event: "OPENPIX:CHARGE_EXPIRED";
-    } & ChargePayload)
-  | ({
-      event: "OPENPIX:TRANSACTION_RECEIVED";
-    } & TransactionPayload)
-  | ({
-      event: "OPENPIX:TRANSACTION_REFUND_RECEIVED";
-    } & TransactionPayload)
-  | ({
-      event: "OPENPIX:MOVEMENT_CONFIRMED";
-    } & MoventPayload)
-  | ({
-      event: "OPENPIX:MOVEMENT_FAILED";
-    } & MoventPayload)
-  | ({
-      event: "OPENPIX:MOVEMENT_REMOVED";
-    } & MoventPayload);
+  | ChargeCreatedPayload
+  | ChargeCompletedPayload
+  | ChargeExpiredPayload
+  | TransactionReceivedPayload
+  | TransactionRefundReceivedPayload
+  | MovementConfirmedPayload
+  | MovementFailedPayload
+  | MovementRemovedPayload;
 
 export type HandlerFn<T> = (
   payload: T,
@@ -90,17 +113,13 @@ export type VerifyPayloadType = {
   signature: string;
 };
 
-export type WebhooksHandlerMap = {
-  [path: string]: HandlerFn<WebhookPayload> | undefined;
-};
-
 export type WebhookRegistrationConfig = {
-  onChargeCreated?: HandlerFn<WebhookPayload>;
-  onChargeCompleted?: HandlerFn<WebhookPayload>;
-  onChargeExpired?: HandlerFn<WebhookPayload>;
-  onTransactionReceived?: HandlerFn<WebhookPayload>;
-  onTransactionRefundReceived?: HandlerFn<WebhookPayload>;
-  onMovementConfirmed?: HandlerFn<WebhookPayload>;
-  onMovementFailed?: HandlerFn<WebhookPayload>;
-  onMovementRemoved?: HandlerFn<WebhookPayload>;
+  onChargeCreated?: HandlerFn<ChargeCreatedPayload>;
+  onChargeCompleted?: HandlerFn<ChargeCompletedPayload>;
+  onChargeExpired?: HandlerFn<ChargeExpiredPayload>;
+  onTransactionReceived?: HandlerFn<TransactionReceivedPayload>;
+  onTransactionRefundReceived?: HandlerFn<TransactionRefundReceivedPayload>;
+  onMovementConfirmed?: HandlerFn<MovementConfirmedPayload>;
+  onMovementFailed?: HandlerFn<MovementFailedPayload>;
+  onMovementRemoved?: HandlerFn<MovementRemovedPayload>;
 };
