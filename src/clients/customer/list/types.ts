@@ -1,7 +1,7 @@
-import type { PageInfo } from "@src/clients/commonTypes";
-import type { Customer } from "../commonTypes";
+import type { PageInfo } from '@src/clients/commonTypes';
+import type { Customer } from '../commonTypes';
 
 export type ListResponse = {
-  customers: Customer[];
-  pageInfo: PageInfo;
+	customers: Customer[];
+	pageInfo: PageInfo;
 };
