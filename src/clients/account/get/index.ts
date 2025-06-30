@@ -3,5 +3,5 @@ import type { GetPayload, GetResponse } from "./types";
 
 export default (restClient: RestClientApi) => {
   return (data: GetPayload) =>
-    restClient<GetResponse>(`/api/v1/charge/${data.id}`);
+    restClient<GetResponse>(`/api/v1/account/${data.id}`);
 };
