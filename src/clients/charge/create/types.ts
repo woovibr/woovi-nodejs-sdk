@@ -1,17 +1,17 @@
 import type { CustomerPayload } from "@src/clients/customer/create/types";
 
 import type { AdditionalInfo } from "@src/clients/commonTypes";
-import type { Charge } from "../commonTypes";
+import type { Charge, Split } from "../commonTypes";
 
 export type CreatePayload = {
   correlationID?: string;
   value: number;
   type?: "DYNAMIC" | "OVERDUE";
   comment?: string;
-  identifier?: string;
   expiresIn?: number;
   expiresDate?: string;
   customer?: CustomerPayload;
+  ensureSameTaxId?: boolean;
   daysForDueDate?: number;
   daysAfterDueDate?: number;
   interests?: {
@@ -32,7 +32,13 @@ export type CreatePayload = {
   additionalInfo?: AdditionalInfo[];
   enableCashbackPercentage?: boolean;
   enableCashbackExclusivePercentage?: boolean;
+  subaccount?: string;
+  splits?: Split[]
 };
+
+export type CreateParams = {
+  return_existing?: "true" | "false";
+}
 
 export type CreateResponse = {
   charge: Charge;
