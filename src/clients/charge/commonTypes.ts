@@ -22,4 +22,14 @@ export interface Charge {
   createdAt?: string;
   updatedAt?: string;
   expiresIn?: string;
+  splits?: {
+    sourceAccount?: string;
+    pixKeyType?: "CPF" | "CNPJ" | "EMAIL" | "PHONE" | "EVP";
+  }[] & Split[];
+}
+
+export interface Split {
+  value: number;
+  pixKey: string;
+  splitType: "SPLIT_INTERNAL_TRANSFER" | "SPLIT_SUB_ACCOUNT" | "SPLIT_PARTNER";
 }
