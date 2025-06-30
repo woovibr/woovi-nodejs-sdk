@@ -4,14 +4,14 @@ import type { AdditionalInfo } from '@src/clients/commonTypes';
 import type { Charge } from '../commonTypes';
 
 export type CreatePayload = {
-	correlationID?: string;
+	correlationID: string;
 	value: number;
 	type?: 'DYNAMIC' | 'OVERDUE';
 	comment?: string;
-	identifier?: string;
 	expiresIn?: number;
 	expiresDate?: string;
 	customer?: CustomerPayload;
+	ensureSameTaxID: boolean;
 	daysForDueDate?: number;
 	daysAfterDueDate?: number;
 	interests?: {
@@ -32,6 +32,15 @@ export type CreatePayload = {
 	additionalInfo?: AdditionalInfo[];
 	enableCashbackPercentage?: boolean;
 	enableCashbackExclusivePercentage?: boolean;
+	subaccount?: string;
+	splits?: {
+		value: number;
+		pixKey: string;
+		splitType:
+			| 'SPLIT_PARTNER'
+			| 'SPLIT_INTERNAL_TRANSFER'
+			| 'SPLIT_SUB_ACCOUNT';
+	};
 };
 
 export type CreateResponse = {
