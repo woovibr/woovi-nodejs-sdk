@@ -25,6 +25,8 @@
   },
   "license": "MIT",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "pre-commit": {
     "run": "lint"
   },
@@ -33,9 +35,9 @@
   },
   "repository": "git@github.com:woovibr/woovi-nodejs-sdk.git",
   "scripts": {
-    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "build": "rslib build",
     "commit": "cz",
-    "format": "biome check ./src --apply",
+    "format": "biome check ./src --write",
     "lint": "biome lint ./src",
     "prepare": "pnpm build",
     "prepublishOnly": "pnpm build",
@@ -45,5 +47,14 @@
     "release:minor": "npm version minor && git push --follow-tags",
     "release:patch": "npm version patch && git push --follow-tags"
   },
-  "types": "./dist/index.d.ts"
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ]
 }
