@@ -1,9 +1,3 @@
-/**
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
-
-/** @type {import('jest').Config} */
 const config = {
   collectCoverage: true,
   coverageDirectory: "coverage",
@@ -12,10 +6,10 @@ const config = {
     "^.+\\.(t|j)sx?$": "@swc/jest",
   },
   moduleNameMapper: {
-		"^@src/(.*)$": "<rootDir>/src/$1",
-		"^@utils/(.*)$": "<rootDir>/src/utils/$1",
-		
-	},
+    "^@src/(.*)$": "<rootDir>/src/$1",
+    "^@utils/(.*)$": "<rootDir>/src/utils/$1",
+  },
+  testPathIgnorePatterns: ["/node_modules/", "/dist/"],
 };
 
 module.exports = config;

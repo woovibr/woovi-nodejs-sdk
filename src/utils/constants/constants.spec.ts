@@ -41,7 +41,11 @@ describe("Constants", () => {
   });
 
   it("should return correct user agent", () => {
-    const expectedUserAgent = `Woovi Node.js SDK v1.0.0 (node ${process.version}-x64-linux)`;
-    expect(Constants.getUserAgent()).toEqual(expectedUserAgent);
+    const expectedUserAgents = [
+      `Woovi Node.js SDK v1.0.0 (node ${process.version}-x64-linux)`,
+      `Woovi Node.js SDK v1.0.0 (node ${process.version}-x64-win32)`,
+      `Woovi Node.js SDK v1.0.0 (node ${process.version}-x64-darwin)`,
+    ];
+    expect(expectedUserAgents).toContain(Constants.getUserAgent());
   });
 });
