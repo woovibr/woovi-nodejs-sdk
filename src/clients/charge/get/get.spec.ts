@@ -248,7 +248,8 @@ test("Should have success for charge batch by id (stream mode, 10 items, 200ms d
     await resource({ 
       id: ids, 
       mode: "stream", 
-      streamRoundDelayInMs: 200,
+      chunkRoundDelayInMs: 200,
+      maxChunkSize: 5,
       onData: (data) => {
         received.push(data);
       },
@@ -257,5 +258,10 @@ test("Should have success for charge batch by id (stream mode, 10 items, 200ms d
     const elapsed = Date.now() - start;
 
     expect(received).toEqual(charges);
-    expect(elapsed).toBeGreaterThanOrEqual(200 * (charges.length - 1));
+
+    // Here it is okay to assume that the operation, with the provided data, will take less
+    // than 600ms to complete as we are simulating a delay of 200ms per chunk and want the
+    // tasks to complete in less than 100ms. In real scenarios, this might vary based on network
+    // and server conditions, but for testing purposes, we can set a performance threshold.
+    expect(elapsed).toBeLessThanOrEqual(600);
 });

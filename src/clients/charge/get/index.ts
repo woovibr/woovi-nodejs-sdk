@@ -6,25 +6,60 @@ export default (restClient: RestClientApi) => {
   return async (data: GetPayload) => {
     if (Array.isArray(data.id)) {
       data.mode ??= "buffer";
-      data.streamRoundDelayInMs ??= 100;
+      data.chunkRoundDelayInMs ??= 100;
+      data.maxChunkSize ??= 10;
 
-      const finalResult: Charge[] | null = data.mode === "buffer" ? [] : null;
-      for (const id of data.id) {
-        const response = await restClient<GetResponse>(`/api/v1/charge/${id}`);
-        if (data.mode === "stream" && data.onData) {
-          data.onData(response.charge as Charge);
-          await new Promise((resolve) => {
-            setTimeout(resolve, data.streamRoundDelayInMs);
-          });
-        } else {
-          finalResult!.push(response.charge as Charge);
-        }
-      }
+      const charges = await parallelizeChargeBatchCalls(
+        data.id,
+        restClient,
+        data.mode,
+        data.onData,
+        data.chunkRoundDelayInMs,
+        data.maxChunkSize
+      );
 
       return {
-        charge: finalResult,
+        charge: charges,
       };
     }
     return restClient<GetResponse>(`/api/v1/charge/${data.id}`);
   };
+};
+
+const parallelizeChargeBatchCalls = async (
+  ids: string[], restClient: RestClientApi, mode: "buffer" | "stream",
+  onData?: (charge: Charge) => void,
+  chunkRoundDelayInMs?: number,
+  maxChunkSize?: number
+): Promise<Charge[] | null> => {
+  const chunks = [];
+  for (let i = 0; i < ids.length; i += maxChunkSize!) {
+    chunks.push(ids.slice(i, i + maxChunkSize!));
+  }
+
+  if (mode === "stream" && onData) {
+    for (const chunk of chunks) {
+      await Promise.all(
+        chunk.map(async (id) => {
+          const response = await restClient<GetResponse>(`/api/v1/charge/${id}`);
+          onData(response.charge as Charge);
+        })
+      );
+      await new Promise((resolve) => setTimeout(resolve, chunkRoundDelayInMs));
+    }
+    return null;
+  }
+
+  const results: Charge[] = [];
+  for (const chunk of chunks) {
+    const chunkResults = await Promise.all(
+      chunk.map(async (id) => {
+        const response = await restClient<GetResponse>(`/api/v1/charge/${id}`);
+        return response.charge as Charge;
+      })
+    );
+    results.push(...chunkResults);
+    await new Promise((resolve) => setTimeout(resolve, chunkRoundDelayInMs));
+  }
+  return results;
 };

@@ -4,7 +4,8 @@ export type GetPayload = {
   id: string | string[];
   mode?: "buffer" | "stream";
   onData?: (data: Charge) => void;
-  streamRoundDelayInMs?: number;
+  chunkRoundDelayInMs?: number;
+  maxChunkSize?: number;
 };
 
 export type GetResponse = {
