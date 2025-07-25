@@ -24,7 +24,7 @@ export interface Charge {
   pixKey?: string;
   createdAt?: string;
   updatedAt?: string;
-  expiresIn?: string;
+  expiresIn?: number;
   splits?: {
     sourceAccount?: string;
     pixKeyType?: "CPF" | "CNPJ" | "EMAIL" | "PHONE" | "EVP";
