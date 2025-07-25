@@ -15,6 +15,7 @@ import subscription from "./clients/subscription";
 import transactions from "./clients/transactions";
 import transfer from "./clients/transfer";
 import webhook from "./clients/webhook";
+import application from "./clients/application";
 
 const createClient = (config: ApiConfig) => {
   const requestSender = RestClient({
@@ -23,6 +24,7 @@ const createClient = (config: ApiConfig) => {
 
   return {
     account: account(requestSender),
+    application: application(requestSender),
     cashback: cashback(requestSender),
     charge: charge(requestSender),
     chargeRefund: charge_refund(requestSender),
