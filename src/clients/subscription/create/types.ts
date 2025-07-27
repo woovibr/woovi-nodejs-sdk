@@ -11,6 +11,7 @@ export type CreatePayload = {
   additionalInfo?: AdditionalInfo[];
   dayGenerateCharge: number;
   chargeType?: "DYNAMIC" | "OVERDUE";
+  frequency?: "WEEKLY" | "MONTHLY" | "BIMONTHLY" | "TRIMONTHLY" | "SEMIANNUALY" | "ANNUALY";
   dayDue?: number;
 };
 

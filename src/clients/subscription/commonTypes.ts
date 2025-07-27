@@ -5,4 +5,6 @@ export interface Subscription {
   value: number;
   customer: Customer;
   dayGenerateCharge: number;
+  correlationID?: string;
+  status?: "ACTIVE" | "OVERDUE" | "COMPLETED" | "EXPIRED";
 }
