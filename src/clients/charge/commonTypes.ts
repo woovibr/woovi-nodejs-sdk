@@ -1,13 +1,12 @@
-import type { BasicCustomer } from "../commonTypes";
-import { PixQRCode } from "../pix-qr-code/commonTypes";
+import type { BasicCustomer } from '../commonTypes';
 
 export interface Charge {
   value: number;
   customer: BasicCustomer;
-  type: "DYNAMIC" | "OVERDUE";
+  type: 'DYNAMIC' | 'OVERDUE';
   comment?: string;
   brCode?: string;
-  status?: "ACTIVE" | "COMPLETED" | "EXPIRED";
+  status?: 'ACTIVE' | 'COMPLETED' | 'EXPIRED';
   fee?: number;
   expiresDate?: string;
   correlationID: string;
@@ -27,11 +26,12 @@ export interface Charge {
   expiresIn?: number;
   splits?: {
     sourceAccount?: string;
-    pixKeyType?: "CPF" | "CNPJ" | "EMAIL" | "PHONE" | "EVP";
-  }[] & Split[];
+    pixKeyType?: 'CPF' | 'CNPJ' | 'EMAIL' | 'PHONE' | 'EVP';
+  }[] &
+    Split[];
   paymentMethods?: {
     pix?: Pix;
-  }
+  };
 }
 
 export interface Pix {
@@ -49,5 +49,5 @@ export interface Pix {
 export interface Split {
   value: number;
   pixKey: string;
-  splitType: "SPLIT_INTERNAL_TRANSFER" | "SPLIT_SUB_ACCOUNT" | "SPLIT_PARTNER";
+  splitType: 'SPLIT_INTERNAL_TRANSFER' | 'SPLIT_SUB_ACCOUNT' | 'SPLIT_PARTNER';
 }

@@ -1,4 +1,4 @@
-import { type Account, SubAccount } from "../commonTypes";
+import type { Account } from '../commonTypes';
 
 export type WithDrawPayload = {
   id: string;

@@ -1,22 +1,22 @@
-import crypto from "node:crypto";
-import Handle, { verifyPayload, handleWebhooks } from ".";
+import crypto, { type Verify } from 'node:crypto';
+import Handle, { verifyPayload, handleWebhooks } from '.';
 
-jest.mock("node:crypto");
+jest.mock('node:crypto');
 const mockedCrypto = crypto as jest.Mocked<typeof crypto>;
 
-describe("Webhook Utils", () => {
-  describe("verifyPayload", () => {
-    it("should return true for valid payload", () => {
+describe('Webhook Utils', () => {
+  describe('verifyPayload', () => {
+    it('should return true for valid payload', () => {
       const mockVerify = {
         write: jest.fn(),
         end: jest.fn(),
         verify: jest.fn().mockReturnValueOnce(true),
-      };
+      } as unknown as Verify;
 
-      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify as any);
+      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify);
 
-      const payload = { event: "OPENPIX:CHARGE_CREATED", data: {} };
-      const signature = "valid_signature";
+      const payload = { event: 'OPENPIX:CHARGE_CREATED', data: {} };
+      const signature = 'valid_signature';
       const result = verifyPayload({
         payload: JSON.stringify(payload),
         signature,
@@ -24,17 +24,17 @@ describe("Webhook Utils", () => {
       expect(result).toBe(true);
     });
 
-    it("should return false for invalid payload", () => {
+    it('should return false for invalid payload', () => {
       const mockVerify = {
         write: jest.fn(),
         end: jest.fn(),
         verify: jest.fn().mockReturnValueOnce(false),
-      };
+      } as unknown as Verify;
 
-      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify as any);
+      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify);
 
-      const payload = { event: "OPENPIX:CHARGE_CREATED", data: {} };
-      const signature = "invalid_signature";
+      const payload = { event: 'OPENPIX:CHARGE_CREATED', data: {} };
+      const signature = 'invalid_signature';
       const result = verifyPayload({
         payload: JSON.stringify(payload),
         signature,
@@ -43,140 +43,148 @@ describe("Webhook Utils", () => {
     });
   });
 
-  describe("handleWebhooks", () => {
-    it("should return 400 if signature is missing", async () => {
-      const req = { headers: new Map() };
-      const response = await handleWebhooks({}, req as any);
+  describe('handleWebhooks', () => {
+    it('should return 400 if signature is missing', async () => {
+      const req = { headers: new Map() } as unknown as Request;
+      const response = await handleWebhooks({}, req);
       expect(response.status).toBe(400);
     });
 
-    it("should return 400 if signature is invalid", async () => {
+    it('should return 400 if signature is invalid', async () => {
       const mockVerify = {
         write: jest.fn(),
         end: jest.fn(),
         verify: jest.fn().mockReturnValueOnce(false),
-      };
+      } as unknown as Verify;
 
-      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify as any);
+      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify);
 
       const req = {
-        headers: new Map([["x-webhook-signature", "invalid_signature"]]),
+        headers: new Map([['x-webhook-signature', 'invalid_signature']]),
         json: jest.fn().mockResolvedValue({}),
-        text: jest.fn().mockResolvedValue("{}"),
-      };
-      const response = await handleWebhooks({}, req as any);
+        text: jest.fn().mockResolvedValue('{}'),
+      } as unknown as Request;
+      const response = await handleWebhooks({}, req);
       expect(response.status).toBe(400);
     });
 
-    it("should call the correct handler based on event", async () => {
+    it('should call the correct handler based on event', async () => {
       const mockVerify = {
         write: jest.fn(),
         end: jest.fn(),
         verify: jest.fn().mockReturnValueOnce(true),
-      };
+      } as unknown as Verify;
 
-      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify as any);
+      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify);
 
       const mockHandler = jest
         .fn()
-        .mockResolvedValueOnce(new Response("Success", { status: 200 }));
+        .mockResolvedValueOnce(new Response('Success', { status: 200 }));
       const config = { onChargeCreated: mockHandler };
-      const payload = { event: "OPENPIX:CHARGE_CREATED", data: {} };
+      const payload = { event: 'OPENPIX:CHARGE_CREATED', data: {} };
       const req = {
-        headers: new Map([["x-webhook-signature", "valid_signature"]]),
+        headers: new Map([['x-webhook-signature', 'valid_signature']]),
         json: jest.fn().mockResolvedValue(payload),
         text: jest.fn().mockResolvedValue(JSON.stringify(payload)),
-      };
-      const response = await handleWebhooks(config, req as any);
+      } as unknown as Request;
+      const response = await handleWebhooks(config, req);
       expect(mockHandler).toHaveBeenCalledWith(payload);
       expect(response.status).toBe(200);
     });
 
-    it("should return 404 if event handler is not found", async () => {
+    it('should return 404 if event handler is not found', async () => {
       const mockVerify = {
         write: jest.fn(),
         end: jest.fn(),
         verify: jest.fn().mockReturnValueOnce(true),
-      };
+      } as unknown as Verify;
 
-      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify as any);
+      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify);
       const req = {
-        headers: new Map([["x-webhook-signature", "valid_signature"]]),
-        json: jest.fn().mockResolvedValue({ event: "UNKNOWN_EVENT", data: {} }),
-        text: jest.fn().mockResolvedValue(JSON.stringify({ event: "UNKNOWN_EVENT", data: {} })),
-      };
-      const response = await handleWebhooks({}, req as any);
+        headers: new Map([['x-webhook-signature', 'valid_signature']]),
+        json: jest.fn().mockResolvedValue({ event: 'UNKNOWN_EVENT', data: {} }),
+        text: jest
+          .fn()
+          .mockResolvedValue(
+            JSON.stringify({ event: 'UNKNOWN_EVENT', data: {} }),
+          ),
+      } as unknown as Request;
+      const response = await handleWebhooks({}, req);
       expect(response.status).toBe(404);
     });
   });
 
-  describe("handleWebhooks - Default", () => {
-    it("should return 400 if signature is missing", async () => {
-      const req = { headers: new Map() };
-      const response = await Handle({}).POST(req as any);
+  describe('handleWebhooks - Default', () => {
+    it('should return 400 if signature is missing', async () => {
+      const req = { headers: new Map() } as unknown as Request;
+      const response = await Handle({}).POST(req);
       expect(response.status).toBe(400);
     });
 
-    it("should return 400 if signature is invalid", async () => {
+    it('should return 400 if signature is invalid', async () => {
       const mockVerify = {
         write: jest.fn(),
         end: jest.fn(),
         verify: jest.fn().mockReturnValueOnce(false),
-      };
+      } as unknown as Verify;
 
-      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify as any);
+      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify);
 
       const req = {
-        headers: new Map([["x-webhook-signature", "invalid_signature"]]),
+        headers: new Map([['x-webhook-signature', 'invalid_signature']]),
         json: jest.fn().mockResolvedValue({}),
-        text: jest.fn().mockResolvedValue("{}"),
-      };
-      const response = await Handle({}).POST(req as any);
+        text: jest.fn().mockResolvedValue('{}'),
+      } as unknown as Request;
+      const response = await Handle({}).POST(req);
       expect(response.status).toBe(400);
     });
 
-    it("should call the correct handler based on event", async () => {
+    it('should call the correct handler based on event', async () => {
       const mockVerify = {
         write: jest.fn(),
         end: jest.fn(),
         verify: jest.fn().mockReturnValueOnce(true),
-      };
+      } as unknown as Verify;
 
-      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify as any);
+      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify);
 
       const mockHandler = jest
         .fn()
-        .mockResolvedValueOnce(new Response("Success", { status: 200 }));
+        .mockResolvedValueOnce(new Response('Success', { status: 200 }));
       const config = { onChargeCreated: mockHandler };
-      const payload = { event: "OPENPIX:CHARGE_CREATED", data: {} };
+      const payload = { event: 'OPENPIX:CHARGE_CREATED', data: {} };
       const req = {
-        headers: new Map([["x-webhook-signature", "valid_signature"]]),
+        headers: new Map([['x-webhook-signature', 'valid_signature']]),
         json: jest.fn().mockResolvedValue(payload),
         text: jest.fn().mockResolvedValue(JSON.stringify(payload)),
-      };
-      const response = await Handle(config).POST(req as any);
+      } as unknown as Request;
+      const response = await Handle(config).POST(req);
       expect(mockHandler).toHaveBeenCalledWith(payload);
       expect(response.status).toBe(200);
     });
 
-    it("should return 404 if event handler is not found", async () => {
+    it('should return 404 if event handler is not found', async () => {
       const mockVerify = {
         write: jest.fn(),
         end: jest.fn(),
         verify: jest.fn().mockReturnValueOnce(true),
-      };
+      } as unknown as Verify;
 
-      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify as any);
+      mockedCrypto.createVerify.mockReturnValueOnce(mockVerify);
       const req = {
-        headers: new Map([["x-webhook-signature", "valid_signature"]]),
-        json: jest.fn().mockResolvedValue({ event: "UNKNOWN_EVENT", data: {} }),
-        text: jest.fn().mockResolvedValue(JSON.stringify({ event: "UNKNOWN_EVENT", data: {} })),
-      };
-      const response = await Handle({}).POST(req as any);
+        headers: new Map([['x-webhook-signature', 'valid_signature']]),
+        json: jest.fn().mockResolvedValue({ event: 'UNKNOWN_EVENT', data: {} }),
+        text: jest
+          .fn()
+          .mockResolvedValue(
+            JSON.stringify({ event: 'UNKNOWN_EVENT', data: {} }),
+          ),
+      } as unknown as Request;
+      const response = await Handle({}).POST(req);
       expect(response.status).toBe(404);
     });
 
-    it("should have the same configs", async () => {
+    it('should have the same configs', async () => {
       const handler = Handle({});
       expect(handler.config).toEqual({});
     });
