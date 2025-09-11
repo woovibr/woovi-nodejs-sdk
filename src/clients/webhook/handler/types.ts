@@ -54,7 +54,7 @@ type Transaction = {
 };
 
 type ChargePayload = {
-  charge: ChargePayload;
+  charge: Charge;
   pix: Pix;
   pixQrCode?: PixQrCode;
 };
