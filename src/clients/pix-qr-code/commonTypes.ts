@@ -4,8 +4,8 @@ export interface PixQRCode {
   brCode: string;
   correlationID: string;
   paymentLinkID: string;
-  paymentLinkUrl: any;
-  qrCodeImage: any;
+  paymentLinkUrl: string;
+  qrCodeImage: string;
   createdAt: string;
   updatedAt: string;
 }

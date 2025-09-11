@@ -59,7 +59,7 @@ export async function handleWebhooks(
       status: 400,
     });
 
-  if ((payload as any)?.evento === 'teste_webhook') {
+  if ('evento' in payload && payload.evento === 'teste_webhook') {
     return new Response('Test webhook acknowledged', { status: 200 });
   }
 

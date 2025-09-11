@@ -1,18 +1,18 @@
-import type { AdditionalInfo, BasicCustomer } from "../commonTypes";
+import type { AdditionalInfo, BasicCustomer } from '../commonTypes';
 
 export type Charge = {
   value: number;
   customer: BasicCustomer;
-  type: "DYNAMIC" | "OVERDUE";
+  type: 'DYNAMIC' | 'OVERDUE';
   brCode: string;
-  status: "ACTIVE" | "COMPLETED" | "EXPIRED";
+  status: 'ACTIVE' | 'COMPLETED' | 'EXPIRED';
   correlationID: string;
   paymentLinkID: string;
-  paymentLinkUrl: any;
-  globalID: any;
-  transactionID: any;
+  paymentLinkUrl: string;
+  globalID: string;
+  transactionID: string;
   identifier: string;
-  qrCodeImage: any;
+  qrCodeImage: string;
   additionalInfo?: AdditionalInfo[];
   pixKey: string;
   createdAt: string;
@@ -38,8 +38,8 @@ type PixQRCode = {
   brCode: string;
   correlationID: string;
   paymentLinkID: string;
-  paymentLinkUrl: any;
-  qrCodeImage: any;
+  paymentLinkUrl: string;
+  qrCodeImage: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -55,7 +55,7 @@ export type Transaction = {
   customer: BasicCustomer;
   withdraw: Withdraw;
   payer: BasicCustomer;
-  type: "PAYMENT" | "WITHDRAW" | "REFUND" | "FEE";
-  globalID: any;
+  type: 'PAYMENT' | 'WITHDRAW' | 'REFUND' | 'FEE';
+  globalID: string;
   pixQrCode: PixQRCode;
 };
