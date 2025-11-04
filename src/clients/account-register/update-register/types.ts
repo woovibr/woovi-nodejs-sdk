@@ -1,5 +1,5 @@
-import { TaxID } from '@src/clients/commonTypes';
-import { Document, Representative } from '../commonTypes';
+import type { TaxID } from '@src/clients/commonTypes';
+import type { Document, Representative } from '../commonTypes';
 
 export type GetPayload = {
   taxID: string;

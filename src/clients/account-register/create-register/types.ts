@@ -1,6 +1,6 @@
-import { TaxID, Address } from '@src/clients/commonTypes';
+import type { TaxID, Address } from '@src/clients/commonTypes';
 import type { Document, Representative } from '../commonTypes';
-import { PartiallyOptional } from '@utils/types';
+import type { PartiallyOptional } from '@utils/types';
 
 export type CreatePayload = {
   officialName: string;

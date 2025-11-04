@@ -1,4 +1,4 @@
-import type { Address, TaxID } from '../commonTypes';
+import type { Address } from '../commonTypes';
 
 export type DocumentTypeEnum = 'SOCIAL_CONTRACT' | 'ATA' | 'BYLAWS';
 export type RepresentativeDocumentTypeEnum =
