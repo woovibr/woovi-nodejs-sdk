@@ -1,6 +1,7 @@
 export type ApiConfig = {
   appId: string;
-  baseUrl?: string; // it can be production or sandbox (default to production)
+  baseUrl?: string;
+  targetServer?: "production" | "sandbox";
   retries?: number;
 };
 
