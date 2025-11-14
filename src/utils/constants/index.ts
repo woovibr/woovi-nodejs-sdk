@@ -1,6 +1,7 @@
 import type { BinaryToTextEncoding } from "node:crypto";
 
 export const API_BASE_URL = "https://api.woovi.com" as const;
+export const API_SANDBOX_BASE_URL = "https://api.woovi-sandbox.com/" as const;
 export const API_RETRIES = 1 as const;
 export const API_RETRIE_DELAY = 1000 as const;
 
@@ -41,6 +42,7 @@ export const getUserAgent = (): string => {
 
 export default {
   API_BASE_URL,
+  API_SANDBOX_BASE_URL,
   API_RETRIES,
   API_RETRIE_DELAY,
   SDK_VERSION,

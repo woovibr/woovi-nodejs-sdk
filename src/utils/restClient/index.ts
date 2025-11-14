@@ -61,10 +61,17 @@ const RestClient = (clientConfig: ApiConfig) => {
       ...customConfig
     } = config || {};
 
-    const url = appendQueryParamsToUrl(
-      `${clientConfig.baseUrl ?? Constants.API_BASE_URL}${endpoint}`,
-      queryParams,
-    );
+    const selectedBase = clientConfig.baseUrl
+      ?? (clientConfig.targetServer === "sandbox"
+        ? Constants.API_SANDBOX_BASE_URL
+        : Constants.API_BASE_URL);
+
+    const normalizedBase = selectedBase.endsWith("/")
+      ? selectedBase.slice(0, -1)
+      : selectedBase;
+    const normalizedEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+
+    const url = appendQueryParamsToUrl(`${normalizedBase}${normalizedEndpoint}`, queryParams);
     if (body) customConfig.body = JSON.stringify(body);
 
     const headers = Object.assign({}, customConfig.headers, {

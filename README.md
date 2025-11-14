@@ -13,3 +13,14 @@ The SDK is officially maintained by OpenPix and distributed via [Npm](https://ww
 The code is hosted in a [GitHub repository](https://github.com/woovibr/woovi-nodejs-sdk).
 
 Take a look at [how to use it](./docs/usage.md).
+
+## Configuration options
+
+When creating a client with `createClient(config)` the `config` object accepts the following properties:
+
+- `appId` (string) — required. Your application id used as authorization header.
+- `baseUrl` (string) — optional. If provided, it will be used as the API base URL (keeps backwards compatibility).
+- `targetServer` (`"production" | "sandbox"`) — optional. If set to `"sandbox"` the SDK will use the sandbox API server `https://api.woovi-sandbox.com/`. The default is `"production"`.
+- `retries` (number) — optional. Number of retries for network errors (defaults to SDK value).
+
+Note: `baseUrl` takes precedence over `targetServer` when both are provided.
