@@ -23,4 +23,4 @@ When creating a client with `createClient(config)` the `config` object accepts t
 - `targetServer` (`"production" | "sandbox"`) — optional. If set to `"sandbox"` the SDK will use the sandbox API server `https://api.woovi-sandbox.com/`. The default is `"production"`.
 - `retries` (number) — optional. Number of retries for network errors (defaults to SDK value).
 
-Note: `baseUrl` takes precedence over `targetServer` when both are provided.
+Note: `baseUrl` takes precedence over `targetServer` when both are provided
