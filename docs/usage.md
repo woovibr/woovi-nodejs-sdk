@@ -99,7 +99,7 @@ The webhook method has a special feature called handle, great for using to valid
 ```js
 import { createClient } from "@woovi/node-sdk";
 
-const woovi = createClient({ appId: "your-app-id" });
+const woovi = createClient({ appId: "your-app-id" };
 
 const handler = woovi.webhook.handler({
   onChargeCompleted: async (payload) => {},
@@ -110,6 +110,59 @@ export const POST = handler.POST;
 ```
 
 Post receives your request.
+
+## Validation
+
+The SDK includes built-in validation for Pix QR Codes to prevent invalid states. For example, creating a QR Code with `value: 0` is no longer allowed:
+
+```ts
+import { createClient, ValidationError } from "@woovi/node-sdk";
+
+const woovi = createClient({ appId: "your-app-id" });
+
+// ❌ This will throw ValidationError
+try {
+  await woovi.pixQrCode.create({
+    name: "Payment",
+    value: 0, // Invalid: must be greater than 0
+  });
+} catch (error) {
+  if (error instanceof ValidationError) {
+    console.error(error.code); // "INVALID_VALUE"
+    console.error(error.message); // "Amount must be greater than 0 when value is provided"
+  }
+}
+
+// ✅ Valid: positive value
+await woovi.pixQrCode.create({
+  name: "Payment",
+  value: 10.50,
+});
+
+// ✅ Valid: no value (sem valor)
+await woovi.pixQrCode.create({
+  name: "Payment",
+});
+```
+
+You can also use the validation functions directly:
+
+```ts
+import { validateQrCodePayload, ValidationError } from "@woovi/node-sdk";
+
+try {
+  validateQrCodePayload({
+    name: "Payment",
+    value: 10.50,
+  });
+} catch (error) {
+  if (error instanceof ValidationError) {
+    console.error(`Validation failed: ${error.message}`);
+  }
+}
+```
+
+See the [validation documentation](../src/utils/VALIDATION.md) for more details.
 
 ## Dependencies
 The project does not use external dependencies for its operation.

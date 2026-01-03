@@ -44,6 +44,12 @@ const createClient = (config: ApiConfig) => {
 };
 
 export { createClient };
+export {
+  ValidationError,
+  validateQrCodeValue,
+  validateQrCodePayload,
+  QrCodeValidator,
+} from "./utils/validation";
 
 export default {
   createClient,
