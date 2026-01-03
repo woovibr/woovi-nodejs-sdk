@@ -25,6 +25,7 @@ test("Should get error", async () => {
 
   await expect(
     resource({
+      correlationID: "9134e286-6f71-427a-bf00-241681624587",
       value: 100,
     }),
   ).rejects.toEqual({

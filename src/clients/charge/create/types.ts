@@ -4,7 +4,7 @@ import type { AdditionalInfo } from "@src/clients/commonTypes";
 import type { Charge, Split } from "../commonTypes";
 
 export type CreatePayload = {
-  correlationID?: string;
+  correlationID: string;
   value: number;
   type?: "DYNAMIC" | "OVERDUE";
   comment?: string;
