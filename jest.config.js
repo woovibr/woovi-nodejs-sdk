@@ -14,8 +14,10 @@ const config = {
   moduleNameMapper: {
 		"^@src/(.*)$": "<rootDir>/src/$1",
 		"^@utils/(.*)$": "<rootDir>/src/utils/$1",
-		
+
 	},
+  testMatch: ["**/__tests__/**/*.test.ts"],
+  testPathIgnorePatterns: ["/node_modules/", "/dist/"],
 };
 
 module.exports = config;
