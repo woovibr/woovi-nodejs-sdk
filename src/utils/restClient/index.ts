@@ -11,13 +11,8 @@ const RestClient = (clientConfig: ApiConfig) => {
   ): string {
     if (!queryParams) return url;
 
-    const searchParams = new URLSearchParams();
-
-    for (const key in queryParams) {
-      if (Object.prototype.hasOwnProperty.call(queryParams, key)) {
-        searchParams.append(key, queryParams[key].toString());
-      }
-    }
+    const searchParams = new URLSearchParams(
+      Object.entries(queryParams).map(([key, value]) => [key, String(value)]));
 
     return url.includes("?")
       ? `${url}&${searchParams.toString()}`
@@ -105,16 +100,10 @@ const RestClient = (clientConfig: ApiConfig) => {
 
 function objectToQueryString(obj: {
   [key: string]: string | number | boolean;
-}) {
-  const queryParams = [];
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      queryParams.push(
-        `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`,
-      );
-    }
-  }
-  return queryParams.join("&");
+}): string {
+  return new URLSearchParams(
+  	Object.entries(obj).map(([key, value]) => [key, String(value)]))
+    .toString();
 }
 
 export { RestClient, objectToQueryString };
